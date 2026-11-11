@@ -386,3 +386,41 @@ body:has(.consent-box:not([hidden])) .mobile-cta { transform: translateY(110%); 
 .manifest-text { line-height: 1.14; }
 .facts-grid b, .hero-facts b { line-height: 1; }
 .mobile-menu nav a { line-height: 1.2; }
+
+/* =========================================================
+   TYPE SCALE (v3.1) — Headlines insgesamt ruhiger und einheitlich
+   Stufen: Display > Seitentitel > H2 > H3 > H4
+   ========================================================= */
+:root {
+  --fs-display: clamp(56px, 9.2vw, 168px);   /* Startseite: „Böden, die tragen.“ */
+  --fs-page:    clamp(44px, 6.2vw, 104px);   /* H1 der Unterseiten */
+  --fs-h2:      clamp(34px, 4.2vw, 68px);    /* Sektionstitel */
+  --fs-h2-sm:   clamp(30px, 3.4vw, 52px);    /* Sektionstitel in halber Breite */
+  --fs-h3:      clamp(24px, 2.1vw, 34px);    /* Untertitel, Karten, Schritte */
+  --fs-h4:      clamp(19px, 1.4vw, 22px);
+  --fs-stat:    clamp(36px, 3.8vw, 60px);    /* Kennzahlen */
+}
+
+.hero-title { font-size: var(--fs-display); }
+.page-title { font-size: var(--fs-page); }
+.page-title--legal { font-size: clamp(40px, 5.2vw, 84px); }
+
+.h2, .contact .h2, .cta-band .h2, .co-copy .h2, .engage-copy .h2, .projects-head .h2 { font-size: var(--fs-h2); }
+.map-copy .h2, .sp-intro-head { font-size: var(--fs-h2-sm); }
+
+.h3, .contact--page .contact-intro .h3, .ref .h3 { font-size: var(--fs-h3); }
+.step .h3 { font-size: clamp(30px, 3vw, 48px); }
+@media (min-width: 961px) { .svc-t { font-size: clamp(26px, 2.4vw, 38px); } }
+.svc-card-t { font-size: clamp(24px, 2vw, 30px); }
+.pj-end strong { font-size: clamp(24px, 2.1vw, 34px); }
+.manifest-text { font-size: clamp(26px, 3vw, 46px); }
+
+.principles li h3, .person h3, .legal-body h2, .co-facts b, .mini-person b, .consent-title { font-size: var(--fs-h4); }
+.principles li h3, .person h3, .legal-body h2 { font-size: clamp(20px, 1.6vw, 24px); }
+.next-t { font-size: clamp(19px, 1.5vw, 23px); }
+.map-placeholder b { font-size: 24px; }
+
+.facts-grid b { font-size: var(--fs-stat); }
+.hero-facts b { font-size: clamp(22px, 2vw, 32px); }
+
+.mobile-menu nav a { font-size: clamp(30px, 8vw, 42px); }
