@@ -84,7 +84,12 @@ def subnav():
 
 
 def mobile_subnav():
-    return "\n".join(f'          <a href="{svc_url(it)}">{esc(it["nav"])}</a>' for it in ITEMS)
+    return "\n".join(
+        f'          <li><a href="{svc_url(it)}" data-mm-sub="{it["slug"]}">'
+        f'<img src="/assets/img/leistungen/{it["slug"]}/hero.webp" alt="" loading="lazy" width="56" height="56">'
+        f'<span>{esc(it["nav"])}</span></a></li>'
+        for it in ITEMS
+    )
 
 
 def footer_services():

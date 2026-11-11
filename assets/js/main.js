@@ -14,6 +14,7 @@
   const contact = $('[data-brief]') || $('.cta-band') || $('.footer');
   let lastY = 0;
   function onScrollHeader() {
+    if (document.body.classList.contains('menu-open')) return;   // während das Menü offen ist, nichts umschalten
     const y = window.scrollY;
     const heroEnd = hero.offsetHeight - header.offsetHeight;
     header.classList.toggle('is-solid', y > heroEnd - 1);
@@ -29,15 +30,51 @@
   /* ---------- Mobile menu ---------- */
   const toggle = $('[data-menu-toggle]');
   const menu = $('[data-mobile-menu]');
+  let lockedY = 0;
+  function lockScroll(lock) {
+    // iOS-sicherer Scroll-Lock: body fixieren und Position merken
+    const b = document.body;
+    if (lock) {
+      lockedY = window.scrollY;
+      b.style.position = 'fixed'; b.style.top = `-${lockedY}px`; b.style.left = '0'; b.style.right = '0';
+    } else {
+      b.style.position = ''; b.style.top = ''; b.style.left = ''; b.style.right = '';
+      const html = document.documentElement, prev = html.style.scrollBehavior;
+      html.style.scrollBehavior = 'auto'; window.scrollTo(0, lockedY); html.style.scrollBehavior = prev;
+    }
+  }
   function setMenu(open) {
+    if (open === !menu.hidden) return;
     toggle.setAttribute('aria-expanded', String(open));
-    menu.hidden = !open;
-    document.body.classList.toggle('menu-open', open);
+    toggle.setAttribute('aria-label', open ? 'Menü schließen' : 'Menü öffnen');
     header.classList.remove('is-hidden');
+    if (open) {
+      menu.hidden = false;
+      lockScroll(true);
+      document.body.classList.add('menu-open');
+      requestAnimationFrame(() => menu.classList.add('is-open'));
+    } else {
+      menu.classList.remove('is-open');
+      document.body.classList.remove('menu-open');
+      lastY = lockedY;            // Wiederherstellen der Position zählt nicht als „runterscrollen“
+      lockScroll(false);
+      header.classList.remove('is-hidden');
+      menu.hidden = true;
+    }
   }
   toggle.addEventListener('click', () => setMenu(menu.hidden));
   $$('a', menu).forEach(a => a.addEventListener('click', () => setMenu(false)));
-  addEventListener('keydown', e => { if (e.key === 'Escape' && !menu.hidden) { setMenu(false); toggle.focus(); } });
+  addEventListener('keydown', e => {
+    if (!menu.hidden && e.key === 'Escape') { setMenu(false); toggle.focus(); }
+    if (!menu.hidden && e.key === 'Tab') {
+      // Fokus im Menü halten (Toggle + Menülinks)
+      const f = [toggle, ...$$('a', menu)];
+      const i = f.indexOf(document.activeElement);
+      if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
+      else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+  matchMedia('(min-width: 1081px)').addEventListener?.('change', e => { if (e.matches) setMenu(false); });
 
   /* ---------- Hero parallax ---------- */
   const heroImg = $('.hero-media img');
@@ -228,7 +265,9 @@
   }
   function onScrollBuild() {
     if (!steps.length) return;
-    const mid = vh() * (innerWidth < 960 ? .62 : .5);
+    // Mobil: kompletter Aufbau statisch, alle Schritte sichtbar (kein Sticky-Scrollytelling)
+    if (innerWidth <= 960) { setStep(steps.length - 1); return; }
+    const mid = vh() * .5;
     let k = 0;
     steps.forEach((s, i) => { if (s.getBoundingClientRect().top < mid) k = i; });
     setStep(k);
@@ -335,6 +374,13 @@
   });
   [['/dienstleistungen', 'leistungen'], ['/uber-uns', 'uber-uns'], ['/partner', 'partner'], ['/kontakt', 'kontakt']]
     .forEach(([pre, key]) => { if (path.includes(pre + '/')) { const l = $(`[data-nav="${key}"]`); if (l) l.classList.add('is-active'); } });
+  // Mobiles Menü: aktuelle Seite markieren
+  $$('[data-mm-sub]').forEach(a => { if (path.includes(a.dataset.mmSub)) a.setAttribute('aria-current', 'page'); });
+  [['/uber-uns/', 'uber-uns'], ['/partner/', 'partner'], ['/kontakt/', 'kontakt']]
+    .forEach(([pre, key]) => { if (path.includes(pre)) { const l = $(`[data-mm="${key}"]`); if (l) l.setAttribute('aria-current', 'page'); } });
+  if (!$$('[data-mm-sub][aria-current], [data-mm][aria-current]').length && !/\/(dienstleistungen|impressum|datenschutz|404)\//.test(path)) {
+    const h = $('[data-mm="home"]'); if (h) h.setAttribute('aria-current', 'page');
+  }
 
   /* ---------- Consent (Cookie-Einstellungen) ---------- */
   const CKEY = 'kb-consent';
