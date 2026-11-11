@@ -42,7 +42,7 @@
   /* ---------- Hero parallax ---------- */
   const heroImg = $('.hero-media img');
   function onScrollHero() {
-    if (reduce) return;
+    if (reduce || !heroImg) return;
     const y = window.scrollY;
     if (y < vh() * 1.2) heroImg.style.translate = `0 ${y * -0.18}px`;
   }

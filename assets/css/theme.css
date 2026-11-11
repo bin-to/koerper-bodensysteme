@@ -375,3 +375,14 @@ body:has(.consent-box:not([hidden])) .mobile-cta { transform: translateY(110%); 
 .legal-hero--404 .hero-actions { flex-direction: row; align-items: center; }
 .page-404 .footer, .page-legal .footer { border-top: 1px solid var(--line-dark); }
 .page-contact .mobile-cta { display: none; }
+
+/* ---------- Zeilenabstände: Umlaute in Versal-Headlines (Ä, Ö, Ü) brauchen Luft ---------- */
+.hero-title { line-height: .92; }
+.page-title { line-height: .98; }
+.hero-title .line, .page-title .line { padding-top: .12em; margin-top: -.06em; }
+.h2 { line-height: 1.02; }
+.h3, .step .h3 { line-height: 1.06; }
+.svc-t, .svc-card-t, .next-t, .pj-end strong, .ref .h3, .mini-person b { line-height: 1.06; }
+.manifest-text { line-height: 1.14; }
+.facts-grid b, .hero-facts b { line-height: 1; }
+.mobile-menu nav a { line-height: 1.2; }
