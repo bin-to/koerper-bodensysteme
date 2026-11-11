@@ -33,13 +33,14 @@
   <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
     <div class="mm-scroll">
       <nav class="mm-nav" aria-label="Mobile Navigation">
-        <p class="mm-label">Leistungen</p>
-        <ul class="mm-services">
-{{mobile_subnav}}
-        </ul>
-        <a class="mm-all" href="/dienstleistungen/">Alle Leistungen im Überblick <span aria-hidden="true">→</span></a>
         <ul class="mm-main">
-          <li><a href="/" data-mm="home">Startseite</a></li>
+          <li class="mm-group">
+            <button class="mm-toggle" type="button" aria-expanded="false" aria-controls="mm-sub" data-mm-group>Leistungen <i aria-hidden="true"></i></button>
+            <ul class="mm-sub" id="mm-sub" hidden>
+{{mobile_subnav}}
+              <li><a class="mm-all" href="/dienstleistungen/">Alle Leistungen <span aria-hidden="true">→</span></a></li>
+            </ul>
+          </li>
           <li><a href="/uber-uns/" data-mm="uber-uns">Über uns</a></li>
           <li><a href="/partner/" data-mm="partner">Referenzen &amp; Partner</a></li>
           <li><a href="/kontakt/" data-mm="kontakt">Kontakt</a></li>
@@ -47,11 +48,7 @@
       </nav>
       <div class="mm-foot">
         <a class="btn btn-orange mm-cta" href="{{cta_href}}">Projekt anfragen <span class="arr" aria-hidden="true">→</span></a>
-        <div class="mm-contact">
-          <a href="tel:+4967546903950"><span>Anrufen</span>06754 690 3950</a>
-          <a href="mailto:info@koerper-bodensysteme.de"><span>E-Mail</span>info@koerper-bodensysteme.de</a>
-        </div>
-        <p class="mm-hours">Mo–Fr 08–12 und 13–17 Uhr · Albachstraße 1, 55627 Merxheim</p>
+        <a class="mm-phone" href="tel:+4967546903950">06754 690 3950</a>
       </div>
     </div>
   </div>

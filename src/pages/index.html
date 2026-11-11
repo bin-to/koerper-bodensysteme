@@ -166,7 +166,18 @@
           <div class="build-stage">
             <div class="stage-sticky">
               <svg class="slab" viewBox="0 0 660 470" role="img" aria-label="Isometrischer Querschnitt eines Bodenaufbaus" data-slab></svg>
-              <p class="eyebrow stage-caption">Schicht <span data-stage-num>01</span> von 05 · <span data-stage-name>Vorbereiten</span></p>
+              <p class="eyebrow stage-caption" aria-live="polite">Schicht <span data-stage-num>01</span> von 05 · <span data-stage-name>Vorbereiten</span></p>
+              <div class="build-ctrl" data-build-ctrl>
+                <button type="button" class="bc-arrow" data-bc="prev" aria-label="Vorherige Schicht">←</button>
+                <div class="bc-seg">
+                  <button type="button" data-bc-i="0" aria-label="Schicht 1: Vorbereiten"><span></span></button>
+                  <button type="button" data-bc-i="1" aria-label="Schicht 2: Instandsetzen"><span></span></button>
+                  <button type="button" data-bc-i="2" aria-label="Schicht 3: Aufbauen"><span></span></button>
+                  <button type="button" data-bc-i="3" aria-label="Schicht 4: Schützen"><span></span></button>
+                  <button type="button" data-bc-i="4" aria-label="Schicht 5: Gestalten"><span></span></button>
+                </div>
+                <button type="button" class="bc-arrow" data-bc="next" aria-label="Nächste Schicht">→</button>
+              </div>
             </div>
           </div>
 

@@ -68,12 +68,17 @@
     if (!menu.hidden && e.key === 'Escape') { setMenu(false); toggle.focus(); }
     if (!menu.hidden && e.key === 'Tab') {
       // Fokus im Menü halten (Toggle + Menülinks)
-      const f = [toggle, ...$$('a', menu)];
+      const f = [toggle, ...$$('a, button', menu).filter(n => n.offsetParent)];
       const i = f.indexOf(document.activeElement);
       if (e.shiftKey && i <= 0) { e.preventDefault(); f[f.length - 1].focus(); }
       else if (!e.shiftKey && i === f.length - 1) { e.preventDefault(); f[0].focus(); }
     }
   });
+  // Leistungen aufklappen
+  const mmGroup = $('[data-mm-group]');
+  const mmSub = mmGroup && $('#' + mmGroup.getAttribute('aria-controls'));
+  const setGroup = open => { mmGroup.setAttribute('aria-expanded', String(open)); mmSub.hidden = !open; };
+  if (mmGroup) mmGroup.addEventListener('click', () => setGroup(mmSub.hidden));
   matchMedia('(min-width: 1081px)').addEventListener?.('change', e => { if (e.matches) setMenu(false); });
 
   /* ---------- Hero parallax ---------- */
@@ -263,10 +268,54 @@
     if (stageNum) stageNum.textContent = '0' + (k + 1);
     if (stageName) stageName.textContent = LAYERS[k].name;
   }
+  /* Mobil: Schichten per Wischen aufbauen — jede Karte legt ihre Schicht auf die Platte */
+  const buildMQ = matchMedia('(max-width: 960px)');
+  const track2 = steps.length ? steps[0].parentElement : null;
+  const segs = $$('[data-bc-i]');
+  const cardIndex = () => {
+    const pitch = steps[1].offsetLeft - steps[0].offsetLeft || 1;
+    return clamp(Math.round(track2.scrollLeft / pitch), 0, steps.length - 1);
+  };
+  const goCard = k => {
+    k = clamp(k, 0, steps.length - 1);
+    track2.scrollTo({ left: steps[k].offsetLeft - steps[0].offsetLeft, behavior: reduce ? 'auto' : 'smooth' });
+  };
+  const paintCtrl = k => {
+    segs.forEach((b, i) => { b.classList.toggle('is-on', i <= k); b.setAttribute('aria-current', String(i === k)); });
+    const prev = $('[data-bc="prev"]'), next = $('[data-bc="next"]');
+    if (prev) prev.disabled = k === 0;
+    if (next) next.disabled = k === steps.length - 1;
+  };
+  if (track2 && segs.length) {
+    let raf = 0;
+    track2.addEventListener('scroll', () => {
+      if (!buildMQ.matches) return;
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => { const k = cardIndex(); setStep(k); paintCtrl(k); });
+    }, { passive: true });
+    segs.forEach(b => b.addEventListener('click', () => goCard(+b.dataset.bcI)));
+    $('[data-bc="prev"]').addEventListener('click', () => goCard(cardIndex() - 1));
+    $('[data-bc="next"]').addEventListener('click', () => goCard(cardIndex() + 1));
+    // Einmaliger Wisch-Hinweis, sobald der Aufbau ins Bild kommt
+    if (!reduce && 'IntersectionObserver' in window) {
+      const io = new IntersectionObserver(([e]) => {
+        if (!e.isIntersecting || !buildMQ.matches) return;
+        io.disconnect();
+        if (track2.scrollLeft < 4) { track2.classList.add('is-nudge'); setTimeout(() => track2.classList.remove('is-nudge'), 1400); }
+      }, { threshold: .6 });
+      io.observe(track2);
+    }
+    // Mobil: Platte ohne Beschriftungen, Ausschnitt eng um den Körper
+    const fitSlab = () => svg.setAttribute('viewBox', buildMQ.matches ? '18 28 464 410' : '0 0 660 470');
+    fitSlab();
+    buildMQ.addEventListener?.('change', fitSlab);
+    const syncMode = () => { if (buildMQ.matches) { const k = cardIndex(); current = -1; setStep(k); paintCtrl(k); } else { current = -1; onScrollBuild(); } };
+    buildMQ.addEventListener?.('change', syncMode);
+    paintCtrl(0);
+  }
   function onScrollBuild() {
     if (!steps.length) return;
-    // Mobil: kompletter Aufbau statisch, alle Schritte sichtbar (kein Sticky-Scrollytelling)
-    if (innerWidth <= 960) { setStep(steps.length - 1); return; }
+    if (buildMQ.matches) return;   // mobil steuert das Wischen
     const mid = vh() * .5;
     let k = 0;
     steps.forEach((s, i) => { if (s.getBoundingClientRect().top < mid) k = i; });
@@ -378,8 +427,10 @@
   $$('[data-mm-sub]').forEach(a => { if (path.includes(a.dataset.mmSub)) a.setAttribute('aria-current', 'page'); });
   [['/uber-uns/', 'uber-uns'], ['/partner/', 'partner'], ['/kontakt/', 'kontakt']]
     .forEach(([pre, key]) => { if (path.includes(pre)) { const l = $(`[data-mm="${key}"]`); if (l) l.setAttribute('aria-current', 'page'); } });
-  if (!$$('[data-mm-sub][aria-current], [data-mm][aria-current]').length && !/\/(dienstleistungen|impressum|datenschutz|404)\//.test(path)) {
-    const h = $('[data-mm="home"]'); if (h) h.setAttribute('aria-current', 'page');
+  // Auf Leistungsseiten ist die Gruppe gleich offen
+  if (mmGroup && path.includes('/dienstleistungen/')) {
+    setGroup(true);
+    if (!$('[data-mm-sub][aria-current]')) $('.mm-all', mmSub).setAttribute('aria-current', 'page');
   }
 
   /* ---------- Consent (Cookie-Einstellungen) ---------- */
