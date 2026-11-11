@@ -424,3 +424,33 @@ body:has(.consent-box:not([hidden])) .mobile-cta { transform: translateY(110%); 
 .hero-facts b { font-size: clamp(22px, 2vw, 32px); }
 
 .mobile-menu nav a { font-size: clamp(30px, 8vw, 42px); }
+
+/* =========================================================
+   ORANGE LINIE — als Trennlinie zwischen Headline und Text
+   (statt frei schwebend auf fester Höhe quer durch den Inhalt)
+   ========================================================= */
+.hero-cut { display: none; }
+
+.hero-bottom, .page-hero-bottom { position: relative; padding-top: clamp(22px, 2.4vw, 32px); }
+.page-hero--compact .page-hero-main { position: relative; }
+
+.hero-bottom::before,
+.page-hero-bottom::before,
+.page-hero--compact .page-hero-main::after {
+  content: ""; position: absolute; left: 0; height: 2px; width: min(100%, 520px);
+  background: var(--orange);
+  box-shadow: 0 0 14px rgba(238, 107, 1, .45);
+  transform: scaleX(0); transform-origin: left;
+  animation: lineIn 1.4s .7s var(--ease-heavy) forwards;
+}
+.hero-bottom::before, .page-hero-bottom::before { top: 0; }
+.page-hero--compact .page-hero-main::after { bottom: 0; }
+.hero-bottom { animation-name: fadeIn; }
+@keyframes lineIn { to { transform: scaleX(1); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) {
+  .hero-bottom::before, .page-hero-bottom::before, .page-hero--compact .page-hero-main::after { transform: none; }
+}
+.hero-bottom::before, .page-hero-bottom::before { animation-delay: 1.15s; }
+.page-hero--compact .page-hero-main { padding-bottom: clamp(56px, 7vw, 96px); }
+.page-hero--compact .page-hero-main::after { bottom: clamp(26px, 3vw, 40px); }
