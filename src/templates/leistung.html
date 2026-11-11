@@ -1,0 +1,119 @@
+    <!-- ============ PAGE HERO ============ -->
+    <section class="hero page-hero" id="top" data-hero>
+      <div class="hero-media" aria-hidden="true">
+        <img src="/assets/img/leistungen/{{slug}}/hero.webp" alt="" fetchpriority="high">
+      </div>
+      <div class="hero-cut" aria-hidden="true"><span></span></div>
+      <div class="wrap hero-inner">
+        <nav class="crumbs" aria-label="Brotkrumen">
+          <a href="/">Start</a><span aria-hidden="true">/</span><a href="/dienstleistungen/">Leistungen</a><span aria-hidden="true">/</span><span aria-current="page">{{nav}}</span>
+        </nav>
+        <div class="page-hero-main">
+          <p class="eyebrow page-hero-kicker"><span class="dot"></span>Leistung {{nr}} von 05 · {{nav}}</p>
+          <h1 class="page-title"><span class="line"><span>{{h1}}</span></span></h1>
+        </div>
+        <div class="page-hero-bottom">
+          <p class="hero-lead">{{lead}}</p>
+          <div class="hero-actions">
+            <a class="btn btn-orange" href="{{cta_href}}">Projekt anfragen <span class="arr" aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#umfang">Leistungsumfang</a>
+          </div>
+        </div>
+      </div>
+      <ul class="hero-facts wrap" aria-label="Vorteile">
+{{highlights}}
+      </ul>
+    </section>
+
+    <!-- ============ INTRO ============ -->
+    <section class="sp-intro">
+      <div class="wrap sp-intro-grid">
+        <p class="eyebrow">Ausgangslage</p>
+        <h2 class="h2 sp-intro-head">{{intro_head}}</h2>
+        <div class="sp-intro-cols">
+          <div>
+            <p class="sp-k">Die Herausforderung</p>
+            <p>{{problem}}</p>
+          </div>
+          <div>
+            <p class="sp-k sp-k--o">Unsere Lösung</p>
+            <p>{{solution}}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SCOPE ============ -->
+    <section class="sp-scope" id="umfang" aria-labelledby="scope-title">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">Leistungsumfang</p>
+          <h2 id="scope-title" class="h2">Was wir für Sie übernehmen</h2>
+          <p class="sec-intro">Alles aus einer Hand, oder genau der Baustein, den Ihr Projekt braucht.</p>
+        </header>
+        <ol class="scope-grid">
+{{scope}}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ SYSTEM ============ -->
+    <section class="sp-system" aria-labelledby="sys-title">
+      <div class="wrap sp-system-grid">
+        <div class="sp-system-copy">
+          <p class="eyebrow">Im System</p>
+          <h2 id="sys-title" class="h2">Teil eines Ganzen</h2>
+          <p class="lead">{{layer_note}}</p>
+          <a class="btn btn-ghost" href="/#aufbau">Zum Systemaufbau <span class="arr" aria-hidden="true">→</span></a>
+        </div>
+        <div class="sp-system-stage">
+          <svg class="slab" viewBox="0 0 660 470" role="img" aria-label="Querschnitt des Bodenaufbaus mit hervorgehobener Schicht" data-slab data-layers="{{layers}}"></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="sp-process" aria-labelledby="proc-title">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">Ablauf</p>
+          <h2 id="proc-title" class="h2">In vier Schritten zum fertigen Boden</h2>
+        </header>
+        <ol class="process" data-process>
+{{process}}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section class="sp-gallery" aria-labelledby="gal-title">
+      <div class="wrap">
+        <header class="sec-head sec-head--split">
+          <div>
+            <p class="eyebrow">Einblicke</p>
+            <h2 id="gal-title" class="h2">Einblicke von der Baustelle</h2>
+          </div>
+          <div class="areas">
+            <p class="sp-k">Typische Einsatzbereiche</p>
+            <ul class="areas-list">
+{{areas}}
+            </ul>
+          </div>
+        </header>
+        <div class="bento" data-gallery>
+{{gallery}}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ NEXT ============ -->
+    <section class="sp-next" aria-label="Weitere Leistungen">
+      <div class="wrap">
+        <p class="eyebrow">Weitere Leistungen</p>
+        <ul class="next-list">
+{{others}}
+        </ul>
+      </div>
+    </section>
+
+{{cta_band}}

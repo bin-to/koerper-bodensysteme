@@ -1,0 +1,120 @@
+    <!-- ============ PAGE HERO ============ -->
+    <section class="hero page-hero page-hero--compact" id="top" data-hero>
+      <div class="hero-media" aria-hidden="true">
+        <img src="/assets/img/leistungen/herstellen-von-sichtbelagen/hero.webp" alt="" fetchpriority="high">
+      </div>
+      <div class="wrap hero-inner">
+        <nav class="crumbs" aria-label="Brotkrumen">
+          <a href="/">Start</a><span aria-hidden="true">/</span><span aria-current="page">Kontakt</span>
+        </nav>
+        <div class="page-hero-main">
+          <p class="eyebrow page-hero-kicker"><span class="dot"></span>Kontakt &amp; Projektanfrage</p>
+          <h1 class="page-title"><span class="line"><span>Sprechen wir über <br>Ihre Fläche<em>.</em></span></span></h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ANFRAGE ============ -->
+    <section class="contact contact--page" id="kontakt" aria-labelledby="ct-title">
+      <div class="wrap contact-grid">
+        <div class="contact-intro">
+          <h2 id="ct-title" class="h3">Drei Angaben genügen für den Start</h2>
+          <p class="lead">Wir melden uns innerhalb unserer Geschäftszeiten persönlich bei Ihnen. Oft vereinbaren wir zuerst einen Termin vor Ort, um die Fläche zu sehen.</p>
+
+          <dl class="contact-direct">
+            <div><dt>Telefon</dt><dd><a href="tel:+4967546903950">+49 6754 690 3950</a></dd></div>
+            <div><dt>E-Mail</dt><dd><a href="mailto:info@koerper-bodensysteme.de">info@<wbr>koerper-bodensysteme.de</a></dd></div>
+            <div><dt>Anschrift</dt><dd>Albachstraße 1<br>55627 Merxheim</dd></div>
+            <div><dt>Geschäftszeiten</dt><dd>Mo–Fr 08–12 und 13–17 Uhr</dd></div>
+          </dl>
+
+          <div class="contact-people">
+            <p class="eyebrow">Direkt zur Projektleitung</p>
+            <div class="mini-person">
+              <img src="/assets/img/p-koerper.webp" alt="" loading="lazy" width="80" height="100">
+              <div><b>Christian Körper</b><span>Inhaber, Projektleitung</span><a href="tel:+491713037099">+49 171 303 7099</a></div>
+            </div>
+            <div class="mini-person">
+              <img src="/assets/img/p-schurr.webp" alt="" loading="lazy" width="80" height="100">
+              <div><b>Daniel Schurr</b><span>Außenstelle Süd, Projektleitung</span><a href="tel:+4915126714365">+49 151 2671 4365</a></div>
+            </div>
+          </div>
+        </div>
+
+        <form class="brief" data-brief novalidate>
+          <fieldset>
+            <legend><span class="step-no">1</span> Sie sind</legend>
+            <div class="chips" data-group="role">
+              <label><input type="radio" name="role" value="Betreiber / Industrie"><span>Betreiber / Industrie</span></label>
+              <label><input type="radio" name="role" value="Generalunternehmer / Bauträger"><span>Generalunternehmer / Bauträger</span></label>
+              <label><input type="radio" name="role" value="Architekt / Planer"><span>Architekt / Planer</span></label>
+              <label><input type="radio" name="role" value="Privat / Gewerbe"><span>Privat / Gewerbe</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend><span class="step-no">2</span> Es geht um</legend>
+            <div class="chips">
+              <label><input type="checkbox" name="type" value="Sanierung"><span>Sanierung</span></label>
+              <label><input type="checkbox" name="type" value="Neuer Industrieboden"><span>Neuer Industrieboden</span></label>
+              <label><input type="checkbox" name="type" value="Beschichtung"><span>Beschichtung</span></label>
+              <label><input type="checkbox" name="type" value="Sichtbelag"><span>Sichtbelag</span></label>
+              <label><input type="checkbox" name="type" value="Fugen / Schleifen"><span>Fugen / Schleifen</span></label>
+              <label><input type="checkbox" name="type" value="WHG-Fläche"><span>WHG-Fläche</span></label>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend><span class="step-no">3</span> Fläche ca.</legend>
+            <div class="chips">
+              <label><input type="radio" name="area" value="bis 200 m²"><span>bis 200 m²</span></label>
+              <label><input type="radio" name="area" value="200–1.000 m²"><span>200–1.000 m²</span></label>
+              <label><input type="radio" name="area" value="1.000–5.000 m²"><span>1.000–5.000 m²</span></label>
+              <label><input type="radio" name="area" value="über 5.000 m²"><span>über 5.000 m²</span></label>
+            </div>
+          </fieldset>
+
+          <div class="fields">
+            <label class="field"><span>Name*</span><input name="name" autocomplete="name" required></label>
+            <label class="field"><span>Firma</span><input name="company" autocomplete="organization"></label>
+            <label class="field"><span>E-Mail*</span><input type="email" name="email" autocomplete="email" required></label>
+            <label class="field"><span>Telefon</span><input type="tel" name="phone" autocomplete="tel"></label>
+            <label class="field field--full"><span>Ort und kurze Beschreibung</span><textarea name="message" rows="4" placeholder="z. B. Lagerhalle in Mainz, Risse und Abplatzungen, Ausführung im Sommer"></textarea></label>
+          </div>
+          <label class="consent"><input type="checkbox" name="consent" required><span>Ich habe die <a href="/datenschutz/">Datenschutzerklärung</a> gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden.*</span></label>
+          <div class="brief-foot">
+            <button class="btn btn-ink" type="submit">Anfrage senden <span class="arr" aria-hidden="true">→</span></button>
+            <p class="form-msg" role="status" data-form-msg></p>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ ABLAUF ============ -->
+    <section class="sp-process" aria-labelledby="proc-title">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">So geht es weiter</p>
+          <h2 id="proc-title" class="h2">Von Ihrer Anfrage zum fertigen Boden</h2>
+        </header>
+        <ol class="process" data-process>
+{{process}}
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ ANFAHRT ============ -->
+    <section class="map-section" aria-labelledby="map-title">
+      <div class="wrap map-grid">
+        <div class="map-copy">
+          <p class="eyebrow">Anfahrt</p>
+          <h2 id="map-title" class="h2">Albachstraße 1, 55627 Merxheim</h2>
+          <p>Unser Stammsitz liegt im Landkreis Bad Kreuznach. Von hier aus und von unserer Außenstelle Süd sind wir bundesweit im Einsatz.</p>
+          <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query=Albachstra%C3%9Fe+1%2C+55627+Merxheim" target="_blank" rel="noopener">Route in Google Maps planen <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="map-frame" data-consent-embed="media" data-src="https://www.google.com/maps?q=Albachstra%C3%9Fe%201%2C%2055627%20Merxheim&amp;output=embed" data-title="Karte: Körper Bodensysteme, Albachstraße 1, 55627 Merxheim">
+          <div class="map-placeholder">
+            <p><b>Karte laden?</b>Beim Laden der Karte werden Daten an Google übertragen. Mehr dazu in unserer <a href="/datenschutz/#google-maps">Datenschutzerklärung</a>.</p>
+            <button class="btn btn-dark" type="button" data-consent-allow="media">Karte anzeigen</button>
+          </div>
+        </div>
+      </div>
+    </section>

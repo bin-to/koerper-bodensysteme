@@ -1,0 +1,26 @@
+  <div class="consent-box" data-consent-box role="dialog" aria-modal="false" aria-labelledby="consent-title" aria-describedby="consent-text" hidden>
+    <div class="consent-main" data-consent-view="main">
+      <p class="consent-title" id="consent-title">Ihre Privatsphäre</p>
+      <p class="consent-text" id="consent-text">Wir verwenden keine Tracking- oder Werbe-Cookies. Externe Inhalte wie Google Maps laden wir nur mit Ihrer Zustimmung. Mehr dazu in der <a href="/datenschutz/#einstellungen">Datenschutzerklärung</a>.</p>
+      <div class="consent-actions">
+        <button class="btn btn-sm btn-dark" type="button" data-consent-accept>Alle akzeptieren</button>
+        <button class="btn btn-sm btn-dark" type="button" data-consent-reject>Nur notwendige</button>
+        <button class="consent-link" type="button" data-consent-settings>Einstellungen</button>
+      </div>
+    </div>
+    <div class="consent-settings" data-consent-view="settings" hidden>
+      <p class="consent-title">Einstellungen</p>
+      <label class="consent-opt">
+        <input type="checkbox" checked disabled>
+        <span><b>Notwendig</b>Speichert Ihre Auswahl in diesem Fenster. Immer aktiv.</span>
+      </label>
+      <label class="consent-opt">
+        <input type="checkbox" data-consent-cat="media">
+        <span><b>Externe Medien</b>Google Maps auf der Kontaktseite. Dabei werden Daten an Google übertragen.</span>
+      </label>
+      <div class="consent-actions">
+        <button class="btn btn-sm btn-dark" type="button" data-consent-save>Auswahl speichern</button>
+        <button class="btn btn-sm btn-dark" type="button" data-consent-accept>Alle akzeptieren</button>
+      </div>
+    </div>
+  </div>

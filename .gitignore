@@ -1,0 +1,12 @@
+# Build-Ausgabe (wird von GitHub Actions erzeugt)
+dist/
+
+# Rohmaterial, Downloads und Sicherungen – nicht Teil der Website
+_source/
+
+# Lokale Werkzeuge
+.claude/
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db

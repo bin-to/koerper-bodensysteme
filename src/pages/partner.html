@@ -1,0 +1,56 @@
+    <!-- ============ PAGE HERO ============ -->
+    <section class="hero page-hero page-hero--short" id="top" data-hero>
+      <div class="hero-media" aria-hidden="true">
+        <img src="/assets/img/partner/hero.webp" alt="" fetchpriority="high">
+      </div>
+      <div class="hero-cut" aria-hidden="true"><span></span></div>
+      <div class="wrap hero-inner">
+        <nav class="crumbs" aria-label="Brotkrumen">
+          <a href="/">Start</a><span aria-hidden="true">/</span><span aria-current="page">Referenzen &amp; Partner</span>
+        </nav>
+        <div class="page-hero-main">
+          <p class="eyebrow page-hero-kicker"><span class="dot"></span>Referenzen &amp; Partner</p>
+          <h1 class="page-title"><span class="line"><span>Projekte und <br>Systeme, die tragen<em>.</em></span></span></h1>
+        </div>
+        <div class="page-hero-bottom">
+          <p class="hero-lead">Ausgewählte Projekte mit Ausgangslage, Lösung und Ergebnis, und die Hersteller, deren geprüfte Systeme wir verarbeiten.</p>
+          <div class="hero-actions">
+            <a class="btn btn-orange" href="#referenzen">Referenzen ansehen <span class="arr" aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#systempartner">Systempartner</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REFERENZEN ============ -->
+    <section class="pt-refs" id="referenzen" aria-labelledby="ref-title">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">Referenzen</p>
+          <h2 id="ref-title" class="h2">Ausgewählte Projekte im Detail</h2>
+          <p class="sec-intro">Weitere Referenzen aus Ihrer Branche nennen wir Ihnen gern im persönlichen Gespräch.</p>
+        </header>
+        <nav class="ref-index" aria-label="Referenzen">
+{{ref_index}}
+        </nav>
+        <div class="refs">
+{{references}}
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SYSTEMPARTNER ============ -->
+    <section class="pt-partners" id="systempartner" aria-labelledby="sp-title">
+      <div class="wrap">
+        <header class="sec-head">
+          <p class="eyebrow">Systempartner</p>
+          <h2 id="sp-title" class="h2">Geprüfte Systeme führender Hersteller</h2>
+          <p class="sec-intro">Ein Boden ist nur so gut wie das System dahinter. Deshalb verarbeiten wir Produkte, deren Eigenschaften geprüft und dokumentiert sind.</p>
+        </header>
+        <ul class="logo-grid">
+{{partner_grid}}
+        </ul>
+      </div>
+    </section>
+
+{{cta_band}}

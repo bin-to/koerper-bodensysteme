@@ -1,0 +1,50 @@
+{
+  "partners": [
+    { "name": "Sika Deutschland", "cat": "Bauchemie & Bodensysteme", "logo": "sika.png", "url": "https://deu.sika.com/" },
+    { "name": "StoCretec", "cat": "Betoninstandsetzung & Bodenbeschichtung", "logo": "stocretec.png", "url": "https://www.stocretec.de/" },
+    { "name": "KORODUR", "cat": "Industrieboden-Systeme", "logo": "korodur.png", "url": "https://www.korodur.de/" },
+    { "name": "RCR Flooring Products", "cat": "Industrial Flooring", "logo": "rcr.png", "url": "https://www.rcrindustrialflooring.com" },
+    { "name": "Chemotechnik Abstatt", "cat": "Bodenbeschichtungen", "logo": "chemotechnik.png", "url": "https://www.chemotechnik.de" },
+    { "name": "Wirths Strahltechnik", "cat": "Strahltechnik", "logo": "wirths.png", "url": "https://wirths-strahltechnik.com/" },
+    { "name": "ASM Profile", "cat": "Fugen- & Kantenprofile", "logo": "asm.png", "url": "https://www.asm-profile.de/" },
+    { "name": "KS Bodensysteme", "cat": "Partnerbetrieb Schweiz", "logo": "ks.png", "url": "https://www.ks-bodensysteme.ch/" }
+  ],
+  "references": [
+    {
+      "id": "tiefgarage",
+      "title": "Tiefgarage",
+      "subtitle": "Beschichtung & Markierung",
+      "service": "beschichtung-and-impragnierung",
+      "facts": [["Ort", "[Ort]"], ["Leistung", "Beschichtung & Markierung"], ["Fläche", "[ca. — m²]"], ["Zeitraum", "[Jahr]"]],
+      "images": ["/assets/img/leistungen/beschichtung-and-impragnierung/hero.webp", "/assets/img/leistungen/beschichtung-and-impragnierung/2.webp", "/assets/img/leistungen/beschichtung-and-impragnierung/3.webp"],
+      "alts": ["Fertig beschichtete Tiefgarage", "Beschichtungsarbeiten in der Tiefgarage", "Stellplätze mit neuer Markierung"],
+      "challenge": "Die Betonfläche einer Tiefgarage war durch Verkehr, Tausalz und Feuchtigkeit stark beansprucht. Gesucht war eine robuste, leicht zu reinigende Oberfläche mit klarer Stellplatzmarkierung, ausgeführt in Abschnitten bei laufender Nutzung.",
+      "solution": "Nach der Untergrundvorbereitung mit Kugelstrahlen haben wir Schadstellen reprofiliert und ein mehrschichtiges Beschichtungssystem aufgebracht. Markierungen, Fahrwege und Anschlüsse wurden direkt mit ausgeführt.",
+      "result": "Eine geschlossene, helle Fläche, die den Raum freundlicher macht, die Orientierung verbessert und den Beton dauerhaft vor eindringenden Stoffen schützt."
+    },
+    {
+      "id": "halle",
+      "title": "Produktions- & Lagerhalle",
+      "subtitle": "Sanierung & Nachbehandlung",
+      "service": "industrie-und-betonbodensanierung",
+      "facts": [["Ort", "[Ort]"], ["Leistung", "Bodensanierung"], ["Fläche", "[ca. — m²]"], ["Zeitraum", "[Jahr]"]],
+      "images": ["/assets/img/leistungen/industrie-und-betonbodensanierung/1.webp", "/assets/img/g-5.webp", "/assets/img/leistungen/industrie-und-betonbodensanierung/2.webp"],
+      "alts": ["Hallenfläche nach der Sanierung", "Großfläche während der Nachbehandlung", "Hallenfläche während der Instandsetzung"],
+      "challenge": "Eine große Hallenfläche zeigte Risse, Ausbrüche und Verschleiß in den Fahrwegen. Die Sanierung musste so geplant werden, dass Teilbereiche weiter genutzt werden konnten.",
+      "solution": "Wir haben die Fläche in Abschnitte gegliedert, den Untergrund vorbereitet und Risse und Fehlstellen kraftschlüssig instand gesetzt. Die neue Oberfläche wurde fachgerecht unter Folie nachbehandelt.",
+      "result": "Ein ebener, wieder voll belastbarer Hallenboden, termingerecht übergeben und ohne Stillstand des gesamten Betriebs."
+    },
+    {
+      "id": "feuerwehr",
+      "title": "Feuerwehr\u00adgerätehaus",
+      "subtitle": "Industrieboden aus Beton",
+      "service": "industrieboden-aus-beton",
+      "facts": [["Ort", "[Ort]"], ["Leistung", "Industrieboden aus Beton"], ["Fläche", "[ca. — m²]"], ["Zeitraum", "[Jahr]"]],
+      "images": ["/assets/img/leistungen/industrieboden-aus-beton/6.webp", "/assets/img/leistungen/industrieboden-aus-beton/1.webp", "/assets/img/leistungen/industrieboden-aus-beton/2.webp"],
+      "alts": ["Feuerwehrgerätehaus von außen", "Bodenaufbau mit Bewehrung und Heizleitungen", "Fertige Fahrzeughalle mit Entwässerungsrinne"],
+      "challenge": "In der Fahrzeughalle eines Neubaus war ein Boden gefordert, der schwere Einsatzfahrzeuge, Wasser und Reinigungsmittel dauerhaft aufnimmt, mit integrierter Fußbodenheizung und Entwässerung.",
+      "solution": "Wir haben den Bodenaufbau mit Bewehrung und Heizleitungen vorbereitet, Entwässerungsrinnen exakt eingebunden und den Beton eingebaut, verdichtet und flügelgeglättet.",
+      "result": "Eine robuste, ebene Hallenfläche mit sauberen Anschlüssen an die Rinnen, gebaut für den täglichen Einsatz."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+  <header class="site-header" data-header>
+    <div class="wrap header-inner">
+      <a class="brand" href="/" aria-label="Körper Bodensysteme – Startseite">
+        <img class="brand-light" src="/assets/brand/koerper-logo-light.png" alt="Körper" width="970" height="240">
+        <img class="brand-dark" src="/assets/brand/koerper-logo-dark.png" alt="" width="970" height="240">
+        <span class="brand-sub">Bodensysteme</span>
+      </a>
+      <nav class="nav" aria-label="Hauptnavigation">
+        <div class="nav-item has-sub">
+          <a href="/dienstleistungen/" data-nav="leistungen">Leistungen <span class="caret" aria-hidden="true"></span></a>
+          <div class="subnav">
+            <div class="subnav-inner">
+{{subnav}}
+              <a class="subnav-all" href="/dienstleistungen/">Alle Leistungen im Überblick <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+        <a href="/uber-uns/" data-nav="uber-uns">Über uns</a>
+        <a href="/partner/" data-nav="partner">Referenzen &amp; Partner</a>
+        <a href="/kontakt/" data-nav="kontakt">Kontakt</a>
+      </nav>
+      <div class="header-cta">
+        <a class="header-phone" href="tel:+4967546903950">06754 690 3950</a>
+        <a class="btn btn-sm btn-orange" href="{{cta_href}}">Projekt anfragen</a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+          <span class="sr-only">Menü</span><i></i><i></i>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+      <nav aria-label="Mobile Navigation">
+        <a href="/dienstleistungen/">Leistungen</a>
+        <div class="mobile-sub">
+{{mobile_subnav}}
+        </div>
+        <a href="/uber-uns/">Über uns</a>
+        <a href="/partner/">Referenzen &amp; Partner</a>
+        <a href="/kontakt/">Kontakt</a>
+      </nav>
+      <div class="mobile-menu-foot">
+        <a href="tel:+4967546903950">+49 6754 690 3950</a>
+        <a href="mailto:info@koerper-bodensysteme.de">info@koerper-bodensysteme.de</a>
+      </div>
+    </div>
+  </header>
