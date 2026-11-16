@@ -143,7 +143,7 @@ def llms_txt(items, svc_url, partners):
         "> Fachbetrieb nach Wasserhaushaltsgesetz (WHG) für Industrie- und Betonbodensanierung, Beschichtung und "
         "Imprägnierung, Fugen- und Diamantschleifarbeiten, Sichtbeläge und Industrieböden aus Beton. "
         "Inhabergeführt (Christian Körper), gegründet 2015, Sitz in Merxheim (Rheinland-Pfalz), Außenstelle Süd. "
-        "Einsatz in ganz Deutschland und im europäischen Ausland. TÜV-zertifiziert.",
+        "Einsatz in ganz Deutschland und im europäischen Ausland.",
         "",
         "Zielgruppen: Betreiber von Hallen, Lager-, Logistik- und Produktionsflächen sowie Tiefgaragen; "
         "Generalunternehmer und Bauträger; Architekten und Planer; Privat- und Gewerbekunden (Garage, Werkstatt, Wohnraum).",

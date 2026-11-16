@@ -193,6 +193,7 @@ def build_overview():
 
 def build_leistungen():
     tpl = read("templates/leistung.html")
+    SYSTEM_TPL = read("templates/leistung-system.html")
     for idx, it in enumerate(ITEMS):
         href = contact_href(it["prefill"])
         highlights = "\n".join(
@@ -215,8 +216,9 @@ def build_leistungen():
             for o in ITEMS[idx + 1:] + ITEMS[:idx]
         )
         content = render(tpl, {
-            **{k: it[k] for k in ("slug", "nr", "nav", "h1", "lead", "intro_head", "problem", "solution", "layer_note")},
-            "layers": ",".join(map(str, it["layers"])),
+            **{k: it[k] for k in ("slug", "nr", "nav", "h1", "lead", "intro_head", "problem", "solution")},
+            # Abschnitt "Im System" nur, wenn die Leistung im Beispielaufbau vorkommt
+            "system": render(SYSTEM_TPL, {"layer_note": it["layer_note"], "layers": ",".join(map(str, it["layers"]))}) if it["layers"] else "",
             "highlights": highlights, "scope": scope, "process": process_items(), "areas": areas,
             "gallery": gallery, "others": others, "cta_href": href, "cta_band": cta_band(href=href),
         })

@@ -151,11 +151,12 @@
   const P = (x, y, z) => [OX + (x - y) * C, OY + (x + y) * S - z];
   const pts = arr => arr.map(p => p.map(n => n.toFixed(1)).join(',')).join(' ');
   const LAYERS = [
-    { name: 'Vorbereiten', label: 'Untergrund', t: 54, top: '#5f625c', l: '#4a4d48', r: '#3a3c38', tex: 'speck' },
-    { name: 'Instandsetzen', label: 'Instandsetzung', t: 16, top: '#7b7e78', l: '#62655f', r: '#4f524c', tex: 'crack' },
-    { name: 'Aufbauen', label: 'Tragschicht · Beton', t: 34, top: '#a3a49e', l: '#83847e', r: '#6c6d68', tex: 'joints' },
-    { name: 'Schützen', label: 'Beschichtung', t: 10, top: '#ee6b01', l: '#c45600', r: '#a34700', tex: 'sheen-o' },
-    { name: 'Gestalten', label: 'Sichtbelag', t: 7, top: '#d8d5cd', l: '#b4b1a9', r: '#9b9890', tex: 'sheen' }
+    { name: 'Vorbereiten', label: 'Betonuntergrund', t: 56, top: '#6a6d67', l: '#50534d', r: '#3f423d', tex: 'speck' },
+    { name: 'Risse schließen', label: 'Risse geschlossen', t: 10, top: '#7b7e78', l: '#62655f', r: '#4f524c', tex: 'crack' },
+    { name: 'Grundieren', label: 'Grundierung', t: 7, top: '#8a6a3e', l: '#6d532f', r: '#5a4426' },
+    { name: 'Egalisieren', label: 'Egalisierung', t: 11, top: '#a9aaa4', l: '#8a8b85', r: '#73746f' },
+    { name: 'Beschichten', label: 'Trägerschicht + Quarzsand', t: 14, top: '#c96a1c', l: '#a85310', r: '#8c450c', tex: 'sand' },
+    { name: 'Versiegeln', label: 'Deckversiegelung', t: 7, top: '#ee6b01', l: '#c45600', r: '#a34700', tex: 'sheen-o' }
   ];
   const el = (tag, attrs = {}, parent) => {
     const n = document.createElementNS(NS, tag);
@@ -171,6 +172,9 @@
     el('circle', { cx: 2, cy: 3, r: .9, fill: 'rgba(255,255,255,.18)' }, sp);
     el('circle', { cx: 7, cy: 7, r: .6, fill: 'rgba(0,0,0,.35)' }, sp);
     el('circle', { cx: 5, cy: 1, r: .5, fill: 'rgba(255,255,255,.12)' }, sp);
+    const sd = el('pattern', { id: 'sand', width: 5, height: 5, patternUnits: 'userSpaceOnUse' }, defs);
+    el('circle', { cx: 1.5, cy: 1.5, r: 1, fill: 'rgba(255,230,200,.55)' }, sd);
+    el('circle', { cx: 4, cy: 3.6, r: .8, fill: 'rgba(60,30,0,.4)' }, sd);
     const gs = el('linearGradient', { id: 'sheen', x1: 0, y1: 0, x2: 1, y2: 1 }, defs);
     el('stop', { offset: '0', 'stop-color': '#fff', 'stop-opacity': '0' }, gs);
     el('stop', { offset: '.42', 'stop-color': '#fff', 'stop-opacity': '.0' }, gs);
@@ -208,6 +212,11 @@
           el('line', { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: 'rgba(255,255,255,.07)', 'stroke-width': 3 }, shapes);
         }
       }
+      if (L.tex === 'sand') {
+        el('polygon', { points: topPts, fill: 'url(#sand)' }, shapes);
+        el('polygon', { points: pts([P(0, D, z0), P(W, D, z0), P(W, D, z1), P(0, D, z1)]), fill: 'url(#sand)', opacity: .6 }, shapes);
+        el('polygon', { points: pts([P(W, 0, z0), P(W, D, z0), P(W, D, z1), P(W, 0, z1)]), fill: 'url(#sand)', opacity: .6 }, shapes);
+      }
       if (L.tex === 'crack') {
         const c = [[30, 60], [80, 78], [112, 120], [150, 128], [190, 176], [236, 190]].map(([x, y]) => P(x, y, z1));
         el('polyline', { points: pts(c), fill: 'none', stroke: '#ee6b01', 'stroke-width': 2.2, 'stroke-linejoin': 'round' }, shapes);
@@ -230,11 +239,11 @@
 
       // label
       const anchor = P(W, D * .15, (z0 + z1) / 2);
-      const ly = 318 - i * 54;
+      const ly = 318 - i * (216 / (LAYERS.length - 1));
       const lbl = el('g', { class: 'lbl' }, g);
       el('line', { x1: anchor[0] + 4, y1: anchor[1], x2: 520, y2: ly }, lbl);
       el('circle', { cx: anchor[0] + 2, cy: anchor[1], r: 2.5, fill: '#ee6b01' }, lbl);
-      const tn = el('text', { x: 528, y: ly - 4, class: 'lbl-n' }, lbl); tn.textContent = '0' + (i + 1);
+      const tn = el('text', { x: 528, y: ly - 4, class: 'lbl-n' }, lbl); tn.textContent = String(i + 1).padStart(2, '0');
       const tl = el('text', { x: 528, y: ly + 12 }, lbl); tl.textContent = L.label;
       layerEls.push(g);
     });
@@ -274,6 +283,8 @@
   const segs = $$('[data-bc-i]');
   const cardIndex = () => {
     const pitch = steps[1].offsetLeft - steps[0].offsetLeft || 1;
+    // Am Ende der Spur zählt die letzte Karte, auch wenn mehrere Karten gleichzeitig sichtbar sind
+    if (track2.scrollLeft >= track2.scrollWidth - track2.clientWidth - 2) return steps.length - 1;
     return clamp(Math.round(track2.scrollLeft / pitch), 0, steps.length - 1);
   };
   const goCard = k => {

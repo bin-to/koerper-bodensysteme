@@ -525,7 +525,7 @@ body.menu-open .site-header .header-cta .btn { display: none; }
   }
   .bc-arrow:disabled { opacity: .3; cursor: default; }
   .bc-arrow:not(:disabled):active { border-color: var(--orange); color: var(--orange); }
-  .bc-seg { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+  .bc-seg { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
   .bc-seg button { height: 44px; padding: 0; border: 0; background: none; cursor: pointer; display: flex; align-items: center; }
   .bc-seg span { display: block; width: 100%; height: 4px; background: rgba(251,250,247,.16); transition: background .4s var(--ease), height .3s var(--ease); }
   .bc-seg button.is-on span { background: var(--orange); }

@@ -30,7 +30,7 @@
       ],
       "areas": ["Produktions- und Lagerhallen", "Logistikflächen", "Tiefgaragen & Parkdecks", "Werkstätten", "Flächen nach WHG"],
       "layers": [1],
-      "layer_note": "Die Instandsetzung ist Schicht 02 in unserem Systemaufbau. In der Praxis kombinieren wir sie oft mit Untergrundvorbereitung und einer neuen Beschichtung.",
+      "layer_note": "Am Beispiel einer Beschichtung auf Bestandsbeton: Risse und Ausbrüche schließen wir als Schicht 02, direkt nach der Untergrundvorbereitung. Erst dann wird beschichtet.",
       "prefill": "Sanierung",
       "gallery_alt": ["Großfläche nach der Sanierung", "Hallenfläche während der Instandsetzung", "Sanierungsarbeiten in einer Halle", "Materiallager auf der Baustelle", "Arbeitsbereich in einer Halle", "Saniertes Hallenteilstück"]
     },
@@ -58,7 +58,7 @@
       ],
       "areas": ["Industrieböden", "Estrichflächen", "Logistik & Hochregallager", "Verkaufsflächen", "Parkflächen"],
       "layers": [0, 1],
-      "layer_note": "Diamantschliff und Fugenarbeiten gehören zu Schicht 01 und 02 unseres Systemaufbaus, also zur Vorbereitung und zur Instandsetzung.",
+      "layer_note": "Am Beispiel einer Beschichtung auf Bestandsbeton: Diamantschliff und Fugenarbeiten gehören zu Schicht 01 und 02, also zur Vorbereitung und zur Instandsetzung.",
       "prefill": "Fugen / Schleifen",
       "gallery_alt": ["Schleifmaschine im Einsatz", "Diamantschleifen in einer Verkaufsfläche", "Schleifarbeiten im laufenden Betrieb", "Fläche vor dem Schliff", "Fertige Fläche mit Hohlkehle", "Außenfläche nach den Fugenarbeiten"]
     },
@@ -73,21 +73,21 @@
       "meta": "Bodenbeschichtungen, Imprägnierungen und Versiegelungen für Tiefgaragen, Hallen, Werkstätten und Großküchen. Körper Bodensysteme, Merxheim.",
       "h1": "Schutz, der unter <br>Last besteht<em>.</em>",
       "lead": "Professionelle Bodenbeschichtungen und Imprägnierungen schützen vor Abnutzung, Feuchtigkeit und chemischen Einflüssen. Sie erleichtern die Pflege, verlängern die Lebensdauer und schaffen belastbare, ansprechende Oberflächen für Gewerbe und Industrie.",
-      "highlights": ["Schutz vor Abrieb", "Schutz vor Feuchtigkeit", "Chemisch beständig", "Leicht zu reinigen"],
+      "highlights": ["Schutz vor Abrieb", "Chemisch beständig", "Rutschhemmend möglich", "Leicht zu reinigen"],
       "intro_head": "Die Oberfläche entscheidet, wie lange ein Boden hält.",
       "problem": "Unbeschichteter Beton nimmt Öl, Wasser und Chemikalien auf, staubt und verschleißt unter Last. Das kostet Substanz und erhöht den Reinigungsaufwand.",
-      "solution": "Wir wählen das Beschichtungs- oder Imprägniersystem passend zu Belastung, Nutzung und Optik. Dann bringen wir es fachgerecht auf, von der Grundierung bis zur Versiegelung.",
+      "solution": "Wir wählen das Beschichtungs- oder Imprägniersystem passend zu Belastung, Nutzung, Rutschhemmung und Optik. Dann bringen wir es fachgerecht auf: Risse schließen, grundieren, egalisieren, beschichten und je nach System versiegeln.",
       "scope": [
-        { "t": "Untergrundvorbereitung", "d": "Die Basis für dauerhafte Haftung." },
-        { "t": "Grundierung & Spachtelung", "d": "Geschlossener, tragfähiger Untergrund." },
-        { "t": "Bodenbeschichtung", "d": "Systeme passend zu Last und Nutzung." },
+        { "t": "Untergrund & Risse", "d": "Vorbereiten und Risse schließen, die Basis für dauerhafte Haftung." },
+        { "t": "Grundierung & Egalisierung", "d": "Geschlossener, ebener und tragfähiger Untergrund." },
+        { "t": "Bodenbeschichtung", "d": "Von der glatten Verlaufsbeschichtung bis zur abgestreuten Trägerschicht, passend zu Last und Nutzung." },
         { "t": "Imprägnierung & Versiegelung", "d": "Schutz bei natürlicher Betonoptik." },
-        { "t": "Markierungen & Farbflächen", "d": "Stellplätze, Wege und Sicherheitszonen." },
-        { "t": "Hohlkehlen & Anschlüsse", "d": "Saubere Übergänge zu Wand und Bauteil." }
+        { "t": "Rutschhemmung", "d": "Mit Quarzsand abgestreut und farbig versiegelt, abgestimmt auf die geforderte R-Klasse." },
+        { "t": "Markierungen & Hohlkehlen", "d": "Stellplätze, Wege, Sicherheitszonen und saubere Übergänge zur Wand." }
       ],
       "areas": ["Tiefgaragen & Parkdecks", "Produktion & Lager", "Großküchen", "Werkstätten", "Technik- & Kellerräume"],
-      "layers": [3],
-      "layer_note": "Beschichtung und Imprägnierung bilden Schicht 04 unseres Systemaufbaus, die Schutzschicht über dem tragenden Boden.",
+      "layers": [2, 3, 4, 5],
+      "layer_note": "Grundieren, Egalisieren, Beschichten und Versiegeln bilden die Schichten 03 bis 06 einer rutschhemmenden Beschichtung auf Bestandsbeton.",
       "prefill": "Beschichtung",
       "gallery_alt": ["Rote Beschichtung in einem Produktionsbereich", "Beschichtungsarbeiten in einer Tiefgarage", "Beschichtete Parkfläche mit Markierung", "Großküche mit neuer Beschichtung", "Tiefgarage nach der Beschichtung", "Beschichteter Raum"]
     },
@@ -115,8 +115,8 @@
         { "t": "Imprägnierung & Versiegelung", "d": "Schutz bei voller Optik." }
       ],
       "areas": ["Showrooms & Ausstellungen", "Büros & Agenturen", "Gastronomie & Handel", "Wohnräume & Lofts", "Moderne Industrieflächen"],
-      "layers": [4],
-      "layer_note": "Der Sichtbelag ist Schicht 05 unseres Systemaufbaus, die sichtbare Oberfläche. Ihre Qualität hängt von allen Schichten darunter ab.",
+      "layers": [],
+      "layer_note": "",
       "prefill": "Sichtbelag",
       "gallery_alt": ["Flügelglätter beim Herstellen eines Sichtbelags", "Dunkler, geglätteter Sichtbelag", "Sichtbelag in einer Halle", "Sichtbelag in einem Bestandsgebäude", "Bestandsgebäude während der Arbeiten", "Geglätteter Hallenboden"]
     },
@@ -143,8 +143,8 @@
         { "t": "Fugenschnitt & Nachbehandlung", "d": "Für einen rissarmen, dauerhaften Boden." }
       ],
       "areas": ["Neubau von Hallen", "Logistikzentren", "Produktionsflächen", "Werkstätten", "Feuerwehr- & Kommunalbauten"],
-      "layers": [2],
-      "layer_note": "Der Industrieboden aus Beton ist Schicht 03 unseres Systemaufbaus, die tragende Schicht für alles, was darauf passiert.",
+      "layers": [],
+      "layer_note": "",
       "prefill": "Neuer Industrieboden",
       "gallery_alt": ["Vorbereiteter Bodenaufbau mit Bewehrung", "Glatter Hallenboden mit Entwässerungsrinne", "Einbau einer Entwässerungsrinne", "Halle mit Rinne nach der Fertigstellung", "Material auf der Baustelle", "Feuerwehrgerätehaus von außen"]
     }
