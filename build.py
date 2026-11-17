@@ -253,7 +253,7 @@ def build_partner():
 {imgs}
             </div>
             <div class="ref-body">
-              <p class="eyebrow ref-k">Referenz {n:02d} <span class="ref-flag">Beispieltext</span></p>
+              <p class="eyebrow ref-k">Referenz {n:02d}</p>
               <h3 class="h3">{esc(r["title"])}<small>{esc(r["subtitle"])}</small></h3>
               <dl class="ref-facts">
 {facts}

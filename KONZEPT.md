@@ -75,7 +75,7 @@ Alle Unterseiten folgen derselben Grammatik wie die Startseite: dieselben Fugenl
 **Partner & Referenzen** (`/partner/`)
 1. Hero
 2. Systempartner: Logo-Raster (Graustufen → Farbe beim Hover), Kategorie, externer Link
-3. Referenzen: ausführliche Fallstudien (Bilder, Eckdaten, Ausgangslage / Lösung / Ergebnis) mit Sprungmarken. Texte sind als „Beispieltext“ markiert und werden in `src/data/partner.json` durch echte Projektdaten ersetzt.
+3. Referenzen: ausführliche Fallstudien (Bilder, Eckdaten, Ausgangslage / Lösung / Ergebnis) mit Sprungmarken. Projektdaten (Ort, Leistung, Fläche, Jahr, Texte) stehen in `src/data/partner.json`.
 4. Engagement: Jugendfußball JSG SooNahe, BVB BusinessNetzwerk
 5. CTA-Band
 

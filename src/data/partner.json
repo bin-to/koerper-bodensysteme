@@ -12,39 +12,39 @@
   "references": [
     {
       "id": "tiefgarage",
-      "title": "Tiefgarage",
-      "subtitle": "Beschichtung & Markierung",
+      "title": "Tiefgarage Bad Kreuznach",
+      "subtitle": "Sanierung, Beschichtung & Markierung",
       "service": "beschichtung-and-impragnierung",
-      "facts": [["Ort", "[Ort]"], ["Leistung", "Beschichtung & Markierung"], ["Fläche", "[ca. — m²]"], ["Zeitraum", "[Jahr]"]],
+      "facts": [["Ort", "Bad Kreuznach"], ["Leistung", "Untergrundsanierung, OS 8, OS 5B, Markierung"], ["Fläche", "600 m²"], ["Jahr", "2024"]],
       "images": ["/assets/img/leistungen/beschichtung-and-impragnierung/hero.webp", "/assets/img/leistungen/beschichtung-and-impragnierung/2.webp", "/assets/img/leistungen/beschichtung-and-impragnierung/3.webp"],
       "alts": ["Fertig beschichtete Tiefgarage", "Beschichtungsarbeiten in der Tiefgarage", "Stellplätze mit neuer Markierung"],
-      "challenge": "Die Betonfläche einer Tiefgarage war durch Verkehr, Tausalz und Feuchtigkeit stark beansprucht. Gesucht war eine robuste, leicht zu reinigende Oberfläche mit klarer Stellplatzmarkierung, ausgeführt in Abschnitten bei laufender Nutzung.",
-      "solution": "Nach der Untergrundvorbereitung mit Kugelstrahlen haben wir Schadstellen reprofiliert und ein mehrschichtiges Beschichtungssystem aufgebracht. Markierungen, Fahrwege und Anschlüsse wurden direkt mit ausgeführt.",
-      "result": "Eine geschlossene, helle Fläche, die den Raum freundlicher macht, die Orientierung verbessert und den Beton dauerhaft vor eindringenden Stoffen schützt."
+      "challenge": "Der Untergrund der Tiefgarage musste saniert werden. Gefragt war ein Oberflächenschutz, der Fahrverkehr, Tausalz und Feuchtigkeit dauerhaft standhält, auf der Fläche ebenso wie an den Sockeln.",
+      "solution": "Nach der allgemeinen Untergrundsanierung haben wir die Fläche mit einem Oberflächenschutzsystem OS 8 beschichtet und die Sockel mit OS 5B geschützt. Zum Abschluss wurden Stellplätze und Fahrwege neu markiert.",
+      "result": "600 m² geschützte, befahrbare Tiefgaragenfläche mit klarer Orientierung und einer Oberfläche, die sich leicht reinigen lässt."
     },
     {
       "id": "halle",
-      "title": "Produktions- & Lagerhalle",
-      "subtitle": "Sanierung & Nachbehandlung",
+      "title": "Halle Airbus Hamburg",
+      "subtitle": "Industriebodensanierung mit Hartbeton",
       "service": "industrie-und-betonbodensanierung",
-      "facts": [["Ort", "[Ort]"], ["Leistung", "Bodensanierung"], ["Fläche", "[ca. — m²]"], ["Zeitraum", "[Jahr]"]],
+      "facts": [["Ort", "Hamburg"], ["Leistung", "Industriebodensanierung, Hartbeton-Industriebelag"], ["Fläche", "2.600 m²"], ["Jahr", "2023"]],
       "images": ["/assets/img/leistungen/industrie-und-betonbodensanierung/1.webp", "/assets/img/g-5.webp", "/assets/img/leistungen/industrie-und-betonbodensanierung/2.webp"],
       "alts": ["Hallenfläche nach der Sanierung", "Großfläche während der Nachbehandlung", "Hallenfläche während der Instandsetzung"],
-      "challenge": "Eine große Hallenfläche zeigte Risse, Ausbrüche und Verschleiß in den Fahrwegen. Die Sanierung musste so geplant werden, dass Teilbereiche weiter genutzt werden konnten.",
-      "solution": "Wir haben die Fläche in Abschnitte gegliedert, den Untergrund vorbereitet und Risse und Fehlstellen kraftschlüssig instand gesetzt. Die neue Oberfläche wurde fachgerecht unter Folie nachbehandelt.",
-      "result": "Ein ebener, wieder voll belastbarer Hallenboden, termingerecht übergeben und ohne Stillstand des gesamten Betriebs."
+      "challenge": "Der Boden einer Industriehalle sollte auf 2.600 m² saniert werden. Gefordert war eine Oberfläche, die dem täglichen Betrieb mit hoher mechanischer Belastung dauerhaft standhält.",
+      "solution": "Wir haben den Bestandsboden saniert und einen Hartbeton-Industriebelag mit Rheobond 007 eingebaut.",
+      "result": "Ein verschleißfester, wieder voll belastbarer Hallenboden auf 2.600 m²."
     },
     {
       "id": "feuerwehr",
-      "title": "Feuerwehr\u00adgerätehaus",
-      "subtitle": "Industrieboden aus Beton",
+      "title": "Feuerwehr­gerätehaus Waldbröl",
+      "subtitle": "Bodenplatte, Kunstharzestrich & OS 11 B",
       "service": "industrieboden-aus-beton",
-      "facts": [["Ort", "[Ort]"], ["Leistung", "Industrieboden aus Beton"], ["Fläche", "[ca. — m²]"], ["Zeitraum", "[Jahr]"]],
+      "facts": [["Ort", "Waldbröl"], ["Leistung", "Industriebodenplatte, Kunstharzestrich, OS 11 B"], ["Fläche", "800 m²"], ["Jahr", "2024"]],
       "images": ["/assets/img/leistungen/industrieboden-aus-beton/6.webp", "/assets/img/leistungen/industrieboden-aus-beton/1.webp", "/assets/img/leistungen/industrieboden-aus-beton/2.webp"],
       "alts": ["Feuerwehrgerätehaus von außen", "Bodenaufbau mit Bewehrung und Heizleitungen", "Fertige Fahrzeughalle mit Entwässerungsrinne"],
-      "challenge": "In der Fahrzeughalle eines Neubaus war ein Boden gefordert, der schwere Einsatzfahrzeuge, Wasser und Reinigungsmittel dauerhaft aufnimmt, mit integrierter Fußbodenheizung und Entwässerung.",
-      "solution": "Wir haben den Bodenaufbau mit Bewehrung und Heizleitungen vorbereitet, Entwässerungsrinnen exakt eingebunden und den Beton eingebaut, verdichtet und flügelgeglättet.",
-      "result": "Eine robuste, ebene Hallenfläche mit sauberen Anschlüssen an die Rinnen, gebaut für den täglichen Einsatz."
+      "challenge": "In der Fahrzeughalle war ein Boden gefordert, der schwere Einsatzfahrzeuge, Wasser und Reinigungsmittel dauerhaft aufnimmt.",
+      "solution": "Wir haben die Industriebodenplatte hergestellt, darauf einen Kunstharzestrich aufgebracht und die Fläche mit einem Oberflächenschutzsystem OS 11 B beschichtet.",
+      "result": "800 m² robuste, rissüberbrückend geschützte Hallenfläche, gebaut für den täglichen Einsatz."
     }
   ]
 }
