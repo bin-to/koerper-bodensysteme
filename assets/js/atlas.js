@@ -32,7 +32,7 @@
     if (reduce || from === to) { el.textContent = fmt(to); return; }
     const t0 = performance.now(), dur = 900;
     const step = t => {
-      const k = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - k, 3);
+      const k = Math.min(1, Math.max(0, (t - t0) / dur)), e = 1 - Math.pow(1 - k, 3);
       el.textContent = fmt(Math.round(from + (to - from) * e));
       if (k < 1 && current[key] === to) requestAnimationFrame(step);
     };
@@ -89,6 +89,28 @@
   }
   chips.forEach(c => c.addEventListener('click', () => setFilter(c.dataset.filter)));
 
+  /* ---------- Wischbare Reihen (Handy): Punkte unter jeder Reihe ---------- */
+  groups.forEach(g => {
+    const row = $('.ag-grid', g), items = $$('.ac', row);
+    if (items.length < 2) return;
+    const dots = document.createElement('div');
+    dots.className = 'ag-dots'; dots.setAttribute('aria-hidden', 'true');
+    dots.innerHTML = items.map(() => '<i></i>').join('');
+    row.after(dots);
+    const marks = $$('i', dots);
+    let raf = 0;
+    const sync = () => {
+      raf = 0;
+      const left = row.getBoundingClientRect().left + parseFloat(getComputedStyle(row).paddingLeft);
+      let best = 0, bd = Infinity;
+      items.forEach((it, i) => { const d = Math.abs(it.getBoundingClientRect().left - left); if (d < bd) { bd = d; best = i; } });
+      if (row.scrollLeft + row.clientWidth >= row.scrollWidth - 4) best = items.length - 1;
+      marks.forEach((m, i) => m.classList.toggle('is-on', i === best));
+    };
+    row.addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(sync); }, { passive: true });
+    sync();
+  });
+
   /* ---------- Karte ---------- */
   cards.forEach(c => {
     const pin = pinOf.get(c.dataset.id);
@@ -102,6 +124,12 @@
   const pop = $('.atlas-pop', root);
   const svg = $('.atlas-svg', root);
   let openPin = null;
+
+  // Auf schmalen Bildschirmen in das Projektgebiet zoomen, damit die Punkte groß genug zum Tippen sind
+  const vbFull = svg.getAttribute('viewBox'), vbMobile = svg.dataset.vbMobile;
+  const narrow = matchMedia('(max-width: 760px)');
+  const setVB = () => { closePop(); svg.setAttribute('viewBox', narrow.matches && vbMobile ? vbMobile : vbFull); };
+  narrow.addEventListener?.('change', setVB);
   function closePop() {
     if (!openPin) return;
     openPin.classList.remove('is-open'); openPin = null; pop.hidden = true;
@@ -121,8 +149,8 @@
       }).join('')}</ul>`;
     const box = svg.getBoundingClientRect(), vb = svg.viewBox.baseVal;
     const s = box.width / vb.width;
-    const x = +pin.dataset.x * s + (box.left - pop.parentElement.getBoundingClientRect().left);
-    const y = +pin.dataset.y * s;
+    const x = (+pin.dataset.x - vb.x) * s + (box.left - pop.parentElement.getBoundingClientRect().left);
+    const y = (+pin.dataset.y - vb.y) * s;
     pop.hidden = false;
     const w = pop.offsetWidth, pw = pop.parentElement.offsetWidth;
     const cx = Math.max(w / 2 + 4, Math.min(pw - w / 2 - 4, x));
@@ -139,6 +167,7 @@
   });
   document.addEventListener('click', e => { if (openPin && !pop.contains(e.target)) closePop(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && openPin) { const p = openPin; closePop(); p.focus(); } });
+  setVB();
 
   /* ---------- Bildstrecke ---------- */
   if (!window.HTMLDialogElement) return;

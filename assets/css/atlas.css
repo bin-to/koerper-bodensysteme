@@ -49,7 +49,7 @@
 .atlas-body { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 4vw, 64px); align-items: start; }
 .atlas-map { position: sticky; top: calc(var(--header-h) + 20px); }
 .atlas-map-in { position: relative; }
-.atlas-svg { display: block; width: 100%; height: auto; max-height: calc(100vh - var(--header-h) - 90px); margin-inline: auto; overflow: visible; }
+.atlas-svg { display: block; width: 100%; height: auto; max-height: calc(100vh - var(--header-h) - 90px); margin-inline: auto; overflow: hidden; }
 
 .land { fill: rgba(255, 255, 255, .025); stroke: rgba(255, 255, 255, .16); stroke-width: .7; stroke-linejoin: round; }
 .land-de { fill: rgba(255, 255, 255, .075); stroke: rgba(255, 255, 255, .5); stroke-width: 1; }
@@ -81,11 +81,12 @@
 @keyframes ringIn { from { opacity: 0; } to { opacity: 1; } }
 @keyframes pinIn { from { opacity: 0; transform: translateY(-14px) scale(.4); } to { opacity: 1; transform: none; } }
 
-.atlas-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 14px 0 0; font-size: 13px; color: var(--a-mut); }
-.atlas-legend span { display: inline-block; flex: none; }
+.atlas-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 22px; margin: 14px 0 0; font-size: 13px; color: var(--a-mut); }
+.lg { display: inline-flex; align-items: center; white-space: nowrap; }
+.lg i { display: inline-block; flex: none; margin-right: 8px; }
 .lg-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--orange); }
-.lg-hq { width: 9px; height: 9px; background: var(--white); transform: rotate(45deg); margin-left: 8px; }
-.lg-ring { width: 18px; border-top: 1px dashed rgba(238, 107, 1, .7); margin-left: 8px; }
+.lg-hq { width: 9px; height: 9px; background: var(--white); transform: rotate(45deg); }
+.lg-ring { width: 18px; border-top: 1px dashed rgba(238, 107, 1, .7); }
 
 /* Popover an der Karte */
 .atlas-pop {
@@ -155,18 +156,37 @@
   .atlas-filter { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scrollbar-width: none; }
   .atlas-filter::-webkit-scrollbar { display: none; }
   .af-chip { flex: none; }
-  .ag-head { grid-template-columns: auto minmax(0, 1fr); }
-  .ag-link { grid-column: 1 / -1; grid-row: 3; margin-top: 6px; }
+  .atlas { padding-block: 72px 80px; }
+  .atlas-stats { margin-top: 32px; }
+  .atlas-stats > div { padding: 16px 0 14px; }
+  .atlas-stats dd { font-size: 44px; }
+  .atlas-filter { margin: 20px calc(var(--gutter) * -1) 28px; }
+  .atlas-legend { font-size: 12px; gap: 4px 16px; }
+  .lg-x { display: none; }
+  .atlas-list { gap: 44px; }
+
+  /* Projekte je Leistung als wischbare Reihe */
+  .ag-head { grid-template-columns: auto minmax(0, 1fr) auto; gap: 2px 12px; margin-bottom: 16px; padding-bottom: 12px; }
+  .ag-title { font-size: 26px; }
+  .ag-meta { grid-column: 2 / -1; font-size: 13px; }
+  .ag-link { grid-column: 3; grid-row: 1; font-size: 13px; }
+  .ag-grid {
+    display: grid; grid-auto-flow: column; grid-auto-columns: min(78%, 320px); grid-template-columns: none; gap: 14px;
+    overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scroll-padding-inline: var(--gutter);
+  }
+  .ag-grid::-webkit-scrollbar { display: none; }
+  .ac { scroll-snap-align: start; }
+  .ac.is-in { animation: none; }
+  .ac-link { gap: 12px; }
+  .ac-title { font-size: 22px; }
+  .ac-facts { flex-direction: column; gap: 2px; margin-top: 6px; padding-top: 8px; font-size: 14px; }
+  .ac-play { left: 8px; bottom: 8px; padding: 5px 9px 5px 7px; font-size: 12px; }
+  .ag-dots { display: flex; gap: 6px; justify-content: center; margin-top: 14px; }
+  .ag-dots i { width: 6px; height: 6px; border-radius: 3px; background: rgba(255, 255, 255, .25); transition: width .3s var(--ease), background .3s; }
+  .ag-dots i.is-on { width: 18px; background: var(--orange); }
 }
-@media (max-width: 560px) {
-  .ag-grid { grid-template-columns: 1fr; gap: 14px; }
-  .ac-link { grid-template-columns: 128px minmax(0, 1fr); gap: 14px; align-items: start; }
-  .ac-img img { aspect-ratio: 1; }
-  .ac-play { left: 6px; bottom: 6px; padding: 4px 7px; font-size: 11px; gap: 5px; }
-  .ac-play svg { width: 8px; height: 8px; }
-  .ac-title { font-size: 21px; }
-  .ac-facts { flex-direction: column; gap: 2px; margin-top: 4px; padding-top: 6px; font-size: 14px; }
-}
+@media (min-width: 761px) { .ag-dots { display: none; } }
 
 /* =========================================================
    Bildstrecke („Story“)
@@ -235,7 +255,8 @@ html.story-open { overflow: hidden; }
 .st-next-p img { width: 54px; height: 54px; object-fit: cover; }
 
 @media (max-width: 760px) {
-  .st-stage { --pt: 112px; --pb: 210px; --px: 0px; }
+  .st-stage { --pt: 112px; --pb: 280px; --px: 0px; }
+  .st-proj .st-cnt { white-space: nowrap; }
   .st-img { box-shadow: none; }
   .st-t small { display: block; margin: 4px 0 0; }
   .st-foot { grid-template-columns: 1fr; }

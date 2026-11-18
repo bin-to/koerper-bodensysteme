@@ -61,10 +61,17 @@ def render(projects, services, karte):
         else:
             clusters.append({"x": x, "y": y, "items": [p]})
 
-    pins = []
     for i, c in enumerate(sorted(clusters, key=lambda c: c["y"])):
-        area = sum(p["_area"] for p in c["items"])
-        r = min(5 + math.sqrt(max(area, 150)) / 11, 15)
+        c["i"] = i  # Reihenfolge des Auftritts: von Nord nach Süd
+        c["r"] = min(5 + math.sqrt(max(sum(p["_area"] for p in c["items"]), 150)) / 11, 13)
+    for c in clusters:
+        # Tippfläche größer als der Punkt, aber nie über die halbe Strecke zum Nachbarpunkt hinaus
+        near = min((math.hypot(c["x"] - o["x"], c["y"] - o["y"]) for o in clusters if o is not c), default=99)
+        c["hit"] = max(c["r"], min(c["r"] + 8, 17, near / 2))
+
+    pins = []
+    for c in sorted(clusters, key=lambda c: -c["r"]):  # kleine Punkte zuletzt = oben, damit sie klickbar bleiben
+        i, r = c["i"], c["r"]
         places = []
         for p in c["items"]:
             if p["place"] not in places:
@@ -75,7 +82,7 @@ def render(projects, services, karte):
         pins.append(
             f'<g class="pin" style="--i:{i}" data-ids="{" ".join(p["id"] for p in c["items"])}" '
             f'data-x="{c["x"]:.1f}" data-y="{c["y"]:.1f}" tabindex="0" role="button" aria-label="{esc(label)}">'
-            f'<circle class="pin-hit" cx="{c["x"]:.1f}" cy="{c["y"]:.1f}" r="{max(r + 6, 13):.1f}"/>'
+            f'<circle class="pin-hit" cx="{c["x"]:.1f}" cy="{c["y"]:.1f}" r="{c["hit"]:.1f}"/>'
             f'<circle class="pin-pulse" cx="{c["x"]:.1f}" cy="{c["y"]:.1f}" r="{r:.1f}"/>'
             f'<circle class="pin-dot" cx="{c["x"]:.1f}" cy="{c["y"]:.1f}" r="{r:.1f}"/>{num}</g>')
 
@@ -93,7 +100,12 @@ def render(projects, services, karte):
     hq = (f'<g class="hq"><rect x="{hx - 5.5:.1f}" y="{hy - 5.5:.1f}" width="11" height="11" '
           f'transform="rotate(45 {hx:.1f} {hy:.1f})"/>'
           f'<text x="{hx - 12:.1f}" y="{hy + 4:.1f}" text-anchor="end">Merxheim · Sitz</text></g>')
-    svg = (f'<svg class="atlas-svg" viewBox="0 0 {karte["w"]} {karte["h"]}" role="img" '
+    # Ausschnitt fürs Handy: nur das Gebiet mit Projekten (inkl. Beschriftung am Firmensitz), damit Punkte größer werden
+    xs = [c["x"] for c in clusters] + [hx - 118]
+    ys = [c["y"] for c in clusters]
+    x0, x1, y0, y1 = min(xs) - 10, max(xs) + 34, min(ys) - 40, max(ys) + 34
+    mobile_vb = f"{x0:.0f} {y0:.0f} {x1 - x0:.0f} {y1 - y0:.0f}"
+    svg = (f'<svg class="atlas-svg" viewBox="0 0 {karte["w"]} {karte["h"]}" data-vb-mobile="{mobile_vb}" role="img" '
            f'aria-label="Karte mit unseren Projektorten in Deutschland, der Schweiz und Südtirol">'
            f'<defs><clipPath id="atlas-clip"><rect width="{karte["w"]}" height="{karte["h"]}" rx="2"/></clipPath></defs>'
            f'<g clip-path="url(#atlas-clip)"><g class="lands">{countries}</g>{labels}'
