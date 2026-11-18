@@ -1,0 +1,8 @@
+{
+  "name": "koerper-mailer",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "preview": "node preview.mjs"
+  }
+}

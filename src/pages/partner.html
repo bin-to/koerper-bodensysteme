@@ -13,21 +13,53 @@
           <h1 class="page-title"><span class="line"><span>Projekte und <br>Systeme, die tragen<em>.</em></span></span></h1>
         </div>
         <div class="page-hero-bottom">
-          <p class="hero-lead">Ausgewählte Projekte mit Ausgangslage, Lösung und Ergebnis, und die Hersteller, deren geprüfte Systeme wir verarbeiten.</p>
+          <p class="hero-lead">Unsere Baustellen von der Nahe bis nach Südtirol, drei Projekte im Detail und die Hersteller, deren geprüfte Systeme wir verarbeiten.</p>
           <div class="hero-actions">
-            <a class="btn btn-orange" href="#referenzen">Referenzen ansehen <span class="arr" aria-hidden="true">→</span></a>
+            <a class="btn btn-orange" href="#projektatlas">Projekte ansehen <span class="arr" aria-hidden="true">→</span></a>
             <a class="btn btn-ghost" href="#systempartner">Systempartner</a>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ============ PROJEKTATLAS ============ -->
+    <link rel="stylesheet" href="/assets/css/atlas.css?v={{v}}">
+    <section class="atlas" id="projektatlas" aria-labelledby="atlas-title" data-atlas data-full="/assets/img/referenzen/">
+      <div class="wrap">
+        <header class="atlas-head">
+          <p class="eyebrow">Projektatlas</p>
+          <h2 id="atlas-title" class="h2">Von der Nahe <br>bis nach Südtirol<em>.</em></h2>
+          <p class="atlas-intro">{{atlas_count}} Baustellen der letzten Jahre, geordnet nach Leistung. Wählen Sie einen Bereich, tippen Sie auf einen Ort in der Karte oder öffnen Sie ein Projekt als Bildstrecke.</p>
+        </header>
+        <dl class="atlas-stats" aria-live="polite">
+{{atlas_stats}}
+        </dl>
+        <div class="atlas-filter" role="group" aria-label="Projekte nach Leistung filtern">
+{{atlas_filter}}
+        </div>
+        <div class="atlas-body">
+          <div class="atlas-map">
+            <div class="atlas-map-in">
+              {{atlas_map}}
+              <div class="atlas-pop" hidden></div>
+            </div>
+            <p class="atlas-legend"><span class="lg-dot"></span>Projektort, Größe nach Fläche <span class="lg-hq"></span>Firmensitz <span class="lg-ring"></span>Entfernung</p>
+          </div>
+          <div class="atlas-list">
+{{atlas_groups}}
+          </div>
+        </div>
+      </div>
+      <script type="application/json" id="atlas-data">{{atlas_data}}</script>
+    </section>
+    <script src="/assets/js/atlas.js?v={{v}}" defer></script>
+
     <!-- ============ REFERENZEN ============ -->
     <section class="pt-refs" id="referenzen" aria-labelledby="ref-title">
       <div class="wrap">
         <header class="sec-head">
           <p class="eyebrow">Referenzen</p>
-          <h2 id="ref-title" class="h2">Ausgewählte Projekte im Detail</h2>
+          <h2 id="ref-title" class="h2">Drei Projekte im Detail</h2>
           <p class="sec-intro">Weitere Referenzen aus Ihrer Branche nennen wir Ihnen gern im persönlichen Gespräch.</p>
         </header>
         <nav class="ref-index" aria-label="Referenzen">
@@ -35,16 +67,6 @@
         </nav>
         <div class="refs">
 {{references}}
-        </div>
-        <div class="ref-more" id="projekte">
-          <header class="proj-head">
-            <p class="eyebrow">Weitere Projekte</p>
-            <h2 class="h2">Aus der Praxis der letzten Jahre</h2>
-            <p class="sec-intro">Eine Auswahl aktueller Baustellen, von der Tiefgarage bis zum Showroom. Ein Klick auf das Bild öffnet die Fotos.</p>
-          </header>
-          <ul class="proj-grid">
-{{projects}}
-          </ul>
         </div>
       </div>
     </section>

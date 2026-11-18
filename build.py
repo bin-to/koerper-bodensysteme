@@ -24,6 +24,7 @@ from urllib.parse import urlencode
 
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 import seo  # noqa: E402
+import atlas  # noqa: E402
 
 ROOT = Path(__file__).parent
 SRC = ROOT / "src"
@@ -34,6 +35,9 @@ VERSION = str(int(time.time()))
 BASE = os.environ.get("BASE_PATH", "").rstrip("/")
 # Vorschau-Build (z. B. github.io): nicht indexieren, damit Google nur die echte Domain listet
 PREVIEW = os.environ.get("PREVIEW") == "1"
+# Adresse des Formular-Backends (Vercel Function api/anfrage.mjs, siehe mailer/README.md).
+# Auf Vercel automatisch /api/anfrage; sonst leer = Fallback auf vorbefüllte E-Mail.
+FORM_ENDPOINT = os.environ.get("FORM_ENDPOINT", "/api/anfrage" if os.environ.get("VERCEL") else "").strip()
 
 
 def with_base(doc):
@@ -134,13 +138,19 @@ def page(path, title, description, content, body_class="", og_image="/assets/img
 
 
 # ---------------------------------------------------------------- home
+def svc_icon(it):
+    """Inline-SVG-Icon einer Leistung (src/icons/<slug>.svg)."""
+    p = SRC / "icons" / f'{it["slug"]}.svg'
+    return p.read_text(encoding="utf-8").strip() if p.exists() else ""
+
+
 def services_list():
     rows = []
     for it in ITEMS:
         rows.append(f"""          <li>
             <a href="{svc_url(it)}">
               <span class="svc-n">{it["nr"]}</span>
-              <span class="svc-img" aria-hidden="true"><img src="/assets/img/leistungen/{it["slug"]}/hero.webp" alt="" loading="lazy"></span>
+              <span class="svc-ico">{svc_icon(it)}</span>
               <span class="svc-t">{it["title_html"]}</span>
               <span class="svc-d">{esc(it["short"])}</span>
               <span class="svc-a" aria-hidden="true">→</span>
@@ -266,32 +276,12 @@ def build_partner():
               <a class="link-arrow" href="{svc_url(svc)}">Leistung: {esc(svc["nav"])} <span aria-hidden="true">→</span></a>
             </div>
           </article>""")
-    projects = []
-    for pr in PARTNER["projects"]:
-        base = f'/assets/img/referenzen/{pr["id"]}'
-        alts = pr["alts"]
-        more = "\n".join(f'            <span hidden data-full="{base}/{i}.webp" data-alt="{esc(a)}"></span>'
-                         for i, a in enumerate(alts[1:], 2))
-        client = f'<small>{esc(pr["client"])}</small>' if pr["client"] else ""
-        projects.append(f"""          <li class="proj" data-gallery>
-            <button class="proj-media" type="button" data-full="{base}/1.webp" aria-label="{len(alts)} Fotos ansehen: {esc(pr["place"])}">
-              <img src="{base}/cover.webp" alt="{esc(alts[0])}" loading="lazy" width="960" height="720">
-              <span class="proj-count mono">{len(alts)} Fotos</span>
-            </button>
-{more}
-            <div class="proj-body">
-              <p class="proj-meta mono"><span>{esc(pr["cat"])}</span><span>{esc(pr["year"])}</span></p>
-              <h3 class="proj-title">{esc(pr["place"])}{client}</h3>
-              <dl class="proj-facts">
-                <div><dt>Leistung</dt><dd>{esc(pr["service"])}</dd></div>
-                <div><dt>Fläche</dt><dd>{esc(pr["area"])}</dd></div>
-              </dl>
-            </div>
-          </li>""")
-    index.append(f'          <a href="#projekte"><span>+{len(projects)}</span>Weitere Projekte</a>')
+    karte = json.loads(read("data/karte.json"))
+    services = [{"slug": it["slug"], "nav": it["nav"], "nr": it["nr"], "url": svc_url(it)} for it in ITEMS]
+    atlas_ctx = atlas.render(PARTNER["projects"], services, karte)
     content = render(read("pages/partner.html"), {
         "partner_grid": grid, "references": "\n".join(refs), "ref_index": "\n".join(index),
-        "projects": "\n".join(projects),
+        **atlas_ctx, "v": VERSION,
         "cta_band": cta_band("Ihre Fläche als nächste Referenz?",
                              "Ob Sanierung, Beschichtung oder Neubau: Wir beraten Sie gern zu Ihrem Vorhaben.",
                              label="Nächstes Projekt"),
@@ -316,7 +306,7 @@ def build_about():
 
 
 def build_contact():
-    content = render(read("pages/kontakt.html"), {"process": process_items()})
+    content = render(read("pages/kontakt.html"), {"process": process_items(), "form_endpoint": esc(FORM_ENDPOINT)})
     title = "Kontakt & Projektanfrage | Körper Bodensysteme"
     desc = ("Projekt anfragen bei Körper Bodensysteme: Telefon +49 6754 690 3950, info@koerper-bodensysteme.de, "
             "Albachstraße 1, 55627 Merxheim. Wir melden uns persönlich.")
@@ -326,12 +316,27 @@ def build_contact():
          schema=seo.simple_schema("/kontakt/", title, desc, "ContactPage", "Kontakt"))
 
 
+FORM_PRIVACY_MAILTO = ("Das Anfrageformular auf dieser Website überträgt keine Daten an unseren Server: "
+                       "Es öffnet Ihr E-Mail-Programm mit einer vorbereiteten Nachricht, die Sie selbst absenden.")
+# TODO vor dem Livegang juristisch prüfen lassen
+FORM_PRIVACY_MAILJET = (
+    "Wenn Sie das Anfrageformular nutzen, werden Ihre Angaben verschlüsselt an eine Serverfunktion bei unserem "
+    "Hosting-Anbieter Vercel (siehe Abschnitt 3) übertragen und von dort per E-Mail über den Versanddienst Mailjet "
+    "(Mailjet SAS, 13-13 bis Rue de l’Aubrac, 75012 Paris, Frankreich; Server in der EU) an uns zugestellt. "
+    "Zusätzlich erhalten Sie eine Eingangsbestätigung an die angegebene E-Mail-Adresse. "
+    "Mit beiden Anbietern bestehen Verträge zur Auftragsverarbeitung (Art. 28 DSGVO). "
+    "Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sowie die Anbahnung eines Vertrags "
+    "(Art. 6 Abs. 1 lit. b DSGVO). Wir speichern Ihre Anfrage, solange es für die Bearbeitung und gesetzliche "
+    "Aufbewahrungspflichten erforderlich ist.")
+
+
 def build_legal():
     for slug, name, desc in (
         ("impressum", "Impressum", "Impressum von Körper Bodensysteme, Inhaber Christian Körper, Albachstraße 1, 55627 Merxheim."),
         ("datenschutz", "Datenschutzerklärung", "Datenschutzerklärung von Körper Bodensysteme: welche Daten wir verarbeiten und welche Rechte Sie haben."),
     ):
-        page(f"/{slug}/", f"{name} | Körper Bodensysteme", desc, read(f"pages/{slug}.html"),
+        page(f"/{slug}/", f"{name} | Körper Bodensysteme", desc,
+             render(read(f"pages/{slug}.html"), {"form_privacy": FORM_PRIVACY_MAILJET if FORM_ENDPOINT else FORM_PRIVACY_MAILTO}),
              body_class="page-sub page-legal", priority="0.2",
              schema=seo.simple_schema(f"/{slug}/", name, desc, "WebPage", name))
 

@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <form class="brief" data-brief novalidate>
+        <form class="brief" data-brief data-endpoint="{{form_endpoint}}" novalidate>
           <fieldset>
             <legend><span class="step-no">1</span> Sie sind</legend>
             <div class="chips" data-group="role">
@@ -79,9 +79,10 @@
             <label class="field"><span>Telefon</span><input type="tel" name="phone" autocomplete="tel"></label>
             <label class="field field--full"><span>Ort und kurze Beschreibung</span><textarea name="message" rows="4" placeholder="z. B. Lagerhalle in Mainz, Risse und Abplatzungen, Ausführung im Sommer"></textarea></label>
           </div>
+          <label class="hp" aria-hidden="true">Bitte leer lassen<input name="website" tabindex="-1" autocomplete="off"></label>
           <label class="consent"><input type="checkbox" name="consent" required><span>Ich habe die <a href="/datenschutz/">Datenschutzerklärung</a> gelesen und bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage verarbeitet werden.*</span></label>
           <div class="brief-foot">
-            <button class="btn btn-ink" type="submit">Anfrage senden <span class="arr" aria-hidden="true">→</span></button>
+            <button class="btn btn-ink" type="submit" data-submit>Anfrage senden <span class="arr" aria-hidden="true">→</span></button>
             <p class="form-msg" role="status" data-form-msg></p>
           </div>
         </form>

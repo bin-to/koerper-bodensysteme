@@ -390,7 +390,8 @@
   /* ---------- Brief form ---------- */
   const form = $('[data-brief]');
   const msg = $('[data-form-msg]');
-  if (form) form.addEventListener('submit', e => {
+  const formStart = Date.now();
+  if (form) form.addEventListener('submit', async e => {
     e.preventDefault();
     let ok = true;
     ['name', 'email'].forEach(n => {
@@ -402,25 +403,57 @@
     consent.closest('.consent').classList.toggle('is-invalid', !consent.checked);
     if (!consent.checked) ok = false;
     if (!ok) { msg.textContent = 'Bitte füllen Sie die markierten Felder aus.'; return; }
-    const fd = new FormData(form);
-    const lines = [
-      'Rolle: ' + (fd.get('role') || '–'),
-      'Projektart: ' + (fd.getAll('type').join(', ') || '–'),
-      'Fläche: ' + (fd.get('area') || '–'),
-      '',
-      'Name: ' + fd.get('name'),
-      'Firma: ' + (fd.get('company') || '–'),
-      'E-Mail: ' + fd.get('email'),
-      'Telefon: ' + (fd.get('phone') || '–'),
-      '',
-      fd.get('message') || ''
-    ];
-    // Fallback ohne Backend: vorbefüllte E-Mail öffnen
-    const href = 'mailto:info@koerper-bodensysteme.de?subject=' + encodeURIComponent('Projektanfrage über die Website') + '&body=' + encodeURIComponent(lines.join('\n'));
-    window.location.href = href;
-    msg.textContent = 'Danke! Ihr E-Mail-Programm öffnet sich mit Ihrer vorbereiteten Anfrage.';
-  });
 
+    const fd = new FormData(form);
+    const data = {
+      role: fd.get('role') || '',
+      types: fd.getAll('type'),
+      area: fd.get('area') || '',
+      name: fd.get('name').trim(),
+      company: (fd.get('company') || '').trim(),
+      email: fd.get('email').trim(),
+      phone: (fd.get('phone') || '').trim(),
+      message: (fd.get('message') || '').trim(),
+      website: fd.get('website') || '',          // Honeypot, muss leer bleiben
+      elapsed: Date.now() - formStart,            // Bots senden in Sekundenbruchteilen
+      page: location.href
+    };
+    const mailto = () => {
+      const lines = [
+        'Rolle: ' + (data.role || '–'), 'Projektart: ' + (data.types.join(', ') || '–'), 'Fläche: ' + (data.area || '–'), '',
+        'Name: ' + data.name, 'Firma: ' + (data.company || '–'), 'E-Mail: ' + data.email, 'Telefon: ' + (data.phone || '–'), '', data.message
+      ];
+      return 'mailto:info@koerper-bodensysteme.de?subject=' + encodeURIComponent('Projektanfrage über die Website') + '&body=' + encodeURIComponent(lines.join('\n'));
+    };
+
+    const endpoint = form.dataset.endpoint;
+    // Ohne Backend: vorbefüllte E-Mail öffnen
+    if (!endpoint) {
+      window.location.href = mailto();
+      msg.textContent = 'Danke! Ihr E-Mail-Programm öffnet sich mit Ihrer vorbereiteten Anfrage.';
+      return;
+    }
+
+    const btn = $('[data-submit]', form);
+    form.classList.add('is-sending'); btn.disabled = true; msg.textContent = 'Wird gesendet …';
+    try {
+      const res = await fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+      const out = await res.json().catch(() => ({}));
+      if (!res.ok || !out.ok) throw new Error(out.error || 'send');
+      const done = document.createElement('div');
+      done.className = 'brief-done'; done.setAttribute('role', 'status'); done.tabIndex = -1;
+      done.innerHTML = '<span class="brief-done-ico" aria-hidden="true">✓</span>'
+        + '<p class="eyebrow">Anfrage gesendet</p>'
+        + '<h3 class="h3">Danke, ' + data.name.replace(/[<>&"]/g, '') + '.</h3>'
+        + '<p>Ihre Anfrage ist bei uns angekommen. Wir melden uns in der Regel innerhalb eines Werktags persönlich bei Ihnen.' + (out.confirmed ? ' Eine Bestätigung haben wir an <b>' + data.email.replace(/[<>&"]/g, '') + '</b> geschickt.' : '') + '</p>'
+        + '<p class="brief-done-alt">Eilig? <a href="tel:+4967546903950">06754 690 3950</a></p>';
+      form.replaceWith(done); done.focus({ preventScroll: true });
+      done.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'center' });
+    } catch (err) {
+      form.classList.remove('is-sending'); btn.disabled = false;
+      msg.innerHTML = 'Das hat leider nicht geklappt. Bitte rufen Sie uns an unter <a href="tel:+4967546903950">06754 690 3950</a> oder <a href="' + mailto().replace(/"/g, '&quot;') + '">senden Sie die Anfrage per E-Mail</a>.';
+    }
+  });
 
   /* ---------- Prefill from URL (?typ=…&rolle=…) ---------- */
   const qs = new URLSearchParams(location.search);

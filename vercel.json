@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "python3 build.py",
+  "outputDirectory": "dist",
+  "trailingSlash": true,
+  "functions": {
+    "api/anfrage.mjs": {
+      "includeFiles": "mailer/{templates,assets}/**",
+      "maxDuration": 15
+    }
+  }
+}
