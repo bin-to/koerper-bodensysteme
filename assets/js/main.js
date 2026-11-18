@@ -496,23 +496,30 @@
   }
 
   /* ---------- Lightbox ---------- */
-  const gal = $('[data-gallery]');
-  if (gal && window.HTMLDialogElement) {
-    const items = $$('[data-full]', gal);
+  const gals = $$('[data-gallery]');
+  if (gals.length && window.HTMLDialogElement) {
     const dlg = document.createElement('dialog');
     dlg.className = 'lightbox';
     dlg.setAttribute('aria-label', 'Bildansicht');
     dlg.innerHTML = '<img alt=""><button class="lb-close" type="button" aria-label="Schließen">✕</button><button class="lb-prev" type="button" aria-label="Vorheriges Bild">←</button><button class="lb-next" type="button" aria-label="Nächstes Bild">→</button><p class="mono lb-count"></p>';
     document.body.appendChild(dlg);
     const img = $('img', dlg), cnt = $('.lb-count', dlg);
-    let cur = 0;
+    let items = [], cur = 0;
     const show = i => {
       cur = (i + items.length) % items.length;
       const it = items[cur];
-      img.src = it.dataset.full; img.alt = $('img', it).alt;
+      img.src = it.dataset.full; img.alt = it.dataset.alt || $('img', it)?.alt || '';
       cnt.textContent = `${cur + 1} / ${items.length}`;
+      const multi = items.length > 1;
+      $('.lb-prev', dlg).hidden = !multi; $('.lb-next', dlg).hidden = !multi; cnt.hidden = !multi;
     };
-    items.forEach((it, i) => it.addEventListener('click', () => { show(i); dlg.showModal(); }));
+    gals.forEach(gal => {
+      const list = $$('[data-full]', gal);
+      list.forEach((it, i) => {
+        if (it.hidden) return;
+        it.addEventListener('click', () => { items = list; show(i); dlg.showModal(); });
+      });
+    });
     $('.lb-close', dlg).addEventListener('click', () => dlg.close());
     $('.lb-prev', dlg).addEventListener('click', () => show(cur - 1));
     $('.lb-next', dlg).addEventListener('click', () => show(cur + 1));

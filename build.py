@@ -266,8 +266,32 @@ def build_partner():
               <a class="link-arrow" href="{svc_url(svc)}">Leistung: {esc(svc["nav"])} <span aria-hidden="true">→</span></a>
             </div>
           </article>""")
+    projects = []
+    for pr in PARTNER["projects"]:
+        base = f'/assets/img/referenzen/{pr["id"]}'
+        alts = pr["alts"]
+        more = "\n".join(f'            <span hidden data-full="{base}/{i}.webp" data-alt="{esc(a)}"></span>'
+                         for i, a in enumerate(alts[1:], 2))
+        client = f'<small>{esc(pr["client"])}</small>' if pr["client"] else ""
+        projects.append(f"""          <li class="proj" data-gallery>
+            <button class="proj-media" type="button" data-full="{base}/1.webp" aria-label="{len(alts)} Fotos ansehen: {esc(pr["place"])}">
+              <img src="{base}/cover.webp" alt="{esc(alts[0])}" loading="lazy" width="960" height="720">
+              <span class="proj-count mono">{len(alts)} Fotos</span>
+            </button>
+{more}
+            <div class="proj-body">
+              <p class="proj-meta mono"><span>{esc(pr["cat"])}</span><span>{esc(pr["year"])}</span></p>
+              <h3 class="proj-title">{esc(pr["place"])}{client}</h3>
+              <dl class="proj-facts">
+                <div><dt>Leistung</dt><dd>{esc(pr["service"])}</dd></div>
+                <div><dt>Fläche</dt><dd>{esc(pr["area"])}</dd></div>
+              </dl>
+            </div>
+          </li>""")
+    index.append(f'          <a href="#projekte"><span>+{len(projects)}</span>Weitere Projekte</a>')
     content = render(read("pages/partner.html"), {
         "partner_grid": grid, "references": "\n".join(refs), "ref_index": "\n".join(index),
+        "projects": "\n".join(projects),
         "cta_band": cta_band("Ihre Fläche als nächste Referenz?",
                              "Ob Sanierung, Beschichtung oder Neubau: Wir beraten Sie gern zu Ihrem Vorhaben.",
                              label="Nächstes Projekt"),

@@ -18,7 +18,7 @@ python -m http.server 5173 -d dist   # lokale Vorschau
 | `assets/` | CSS, JS, Bilder, Logos |
 | `_source/` | Rohmaterial (Original-Downloads), wird nicht veröffentlicht |
 
-Neue Referenz: Eintrag in `src/data/partner.json` ergänzen und `python build.py` ausführen.
+Neue Referenz: Eintrag in `src/data/partner.json` ergänzen (`references` = ausführlich, `projects` = Kachel mit Galerie; Bilder unter `assets/img/referenzen/<id>/` als `cover.webp` + `1.webp` …) und `python build.py` ausführen.
 
 ## SEO & KI
 
