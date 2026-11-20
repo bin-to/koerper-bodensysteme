@@ -46,6 +46,7 @@ export async function POST(request) {
     MAIL_FROM: process.env.MAIL_FROM || 'anfrage@koerper-bodensysteme.de',
     MAIL_FROM_NAME: process.env.MAIL_FROM_NAME || 'Körper Bodensysteme Website',
     MAIL_TO: process.env.MAIL_TO || 'info@koerper-bodensysteme.de',
+    MAIL_BCC: process.env.MAIL_BCC || '',
     SITE_URL: process.env.SITE_URL || 'https://www.koerper-bodensysteme.de'
   };
   if (!process.env.MJ_APIKEY_PUBLIC || !process.env.MJ_APIKEY_PRIVATE) {

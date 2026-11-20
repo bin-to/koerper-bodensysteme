@@ -53,6 +53,7 @@ function chips(list) {
   return list.map(t => `<span style="display:inline-block;margin:2px 6px 4px 0;padding:4px 11px 3px;border:1px solid #141513;font-family:'Barlow Condensed','Arial Narrow',Arial,sans-serif;font-size:14px;line-height:18px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#141513;">${esc(t)}</span>`).join('');
 }
 
+const bccList = s => String(s || '').split(',').map(e => e.trim()).filter(e => /^[^@\s<>"]+@[^@\s<>"]+\.[^@\s<>"]{2,}$/.test(e)).map(Email => ({ Email }));
 const telHref = p => 'tel:' + p.replace(/[^\d+]/g, '').replace(/^0(?=[1-9])/, '+49');
 const nl2br = s => esc(s).replace(/\r?\n/g, '<br>');
 
@@ -81,6 +82,8 @@ export function buildMessages(data, { env, templates, logo, now = new Date() }) 
   const intern = {
     From: { Email: env.MAIL_FROM, Name: env.MAIL_FROM_NAME || 'Körper Bodensysteme Website' },
     To: [{ Email: env.MAIL_TO, Name: 'Körper Bodensysteme' }],
+    // Optionale Blindkopie der Büro-Benachrichtigung, z. B. zur Kontrolle (MAIL_BCC, mehrere mit Komma)
+    ...(bccList(env.MAIL_BCC).length ? { Bcc: bccList(env.MAIL_BCC) } : {}),
     ReplyTo: { Email: data.email, Name: data.name },
     Subject: `Projektanfrage: ${data.name}${subjectBits.length ? ' · ' + subjectBits.join(' · ') : ''}`,
     TextPart: [

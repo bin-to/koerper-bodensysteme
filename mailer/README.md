@@ -39,6 +39,7 @@ Das Skript schreibt `mailer/preview/anfrage-intern.html` und `mailer/preview/anf
    | `MJ_APIKEY_PRIVATE` | Mailjet Secret Key (als *Sensitive* markieren) | ja |
    | `MAIL_FROM` | Absender, Standard `anfrage@koerper-bodensysteme.de` | nein |
    | `MAIL_TO` | Empfänger, Standard `info@koerper-bodensysteme.de` | nein |
+   | `MAIL_BCC` | Blindkopie der Büro-Benachrichtigung, mehrere Adressen mit Komma getrennt; leer = keine | nein |
    | `SITE_URL` | Standard `https://www.koerper-bodensysteme.de` | nein |
    | `SEND_CONFIRMATION` | `false` schaltet die Bestätigung an Kunden ab | nein |
    | `MJ_SANDBOX` | `true` = Mailjet prüft nur, versendet nichts | nein |
