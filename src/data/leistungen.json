@@ -22,7 +22,7 @@
       "solution": "Wir analysieren den Bestand, wählen ein passendes Sanierungssystem und setzen es in abgestimmten Abschnitten um. So bleibt Ihr Betrieb planbar, und der Boden ist danach wieder voll nutzbar.",
       "scope": [
         { "t": "Bestandsaufnahme", "d": "Schadensanalyse und Dokumentation der Fläche." },
-        { "t": "Untergrundvorbereitung", "d": "Fräsen, Kugelstrahlen oder Schleifen bis auf tragfähigen Grund." },
+        { "t": "Untergrundvorbereitung", "d": "Abbrechen, Fräsen, Kugelstrahlen, Stocken oder Schleifen bis auf tragfähigen Grund." },
         { "t": "Riss- & Ausbruchsanierung", "d": "Kraftschlüssiges Verfüllen und Reprofilieren." },
         { "t": "Fugensanierung", "d": "Erneuerung defekter Fugen und Kanten." },
         { "t": "Ausgleich & Reprofilierung", "d": "Ebene, geschlossene Flächen für den weiteren Aufbau." },
@@ -77,11 +77,11 @@
       "problem": "Unebenheiten, alte Beläge und offene Fugen bremsen Stapler aus, beschädigen Waren und lassen neue Beschichtungen schlecht haften. Jede Überfahrt belastet die Schwachstellen weiter.",
       "solution": "Wir schleifen die Fläche mit Diamantwerkzeugen, entfernen Altbeläge und sanieren Risse und Fugen mit passenden Profilen und Füllstoffen. Das Ergebnis ist eine gleichmäßige, stabile Oberfläche, die lange hält.",
       "scope": [
-        { "t": "Fugensanierung", "d": "Ausräumen, Kanten instand setzen, neu verfüllen." },
-        { "t": "Rissverfüllung", "d": "Präzises Schließen von Rissen im Beton." },
-        { "t": "Profile & Kantenschutz", "d": "Robuste Lösungen für stark befahrene Fugen." },
         { "t": "Diamantschleifen", "d": "Für Beton- und Estrichflächen." },
         { "t": "Abtrag alter Beläge", "d": "Entfernen von Altbeschichtungen und Verunreinigungen." },
+        { "t": "Fugenarbeiten", "d": "Fugenschnitt bis 300 mm Tiefe, Verguss und Sanierung defekter Fugen." },
+        { "t": "Rissverfüllung", "d": "Präzises Schließen von Rissen im Beton." },
+        { "t": "Sanierungsprofile & Kantenschutz", "d": "Robuste Lösungen für stark befahrene Fugen." },
         { "t": "Vorbereitung", "d": "Untergrund für Beschichtung oder Sichtbelag." }
       ],
       "areas": ["Industrieböden", "Estrichflächen", "Logistik & Hochregallager", "Verkaufsflächen", "Parkflächen"],
@@ -107,11 +107,11 @@
       "solution": "Wir wählen das Beschichtungs- oder Imprägniersystem passend zu Belastung, Nutzung, Rutschhemmung und Optik. Dann bringen wir es fachgerecht auf: Risse schließen, grundieren, egalisieren, beschichten und je nach System versiegeln.",
       "scope": [
         { "t": "Untergrund & Risse", "d": "Vorbereiten und Risse schließen, die Basis für dauerhafte Haftung." },
-        { "t": "Grundierung & Egalisierung", "d": "Geschlossener, ebener und tragfähiger Untergrund." },
+        { "t": "Grundierung & Spachtelung", "d": "Geschlossener, ebener Untergrund, per Spachteltechnik auch für den Dekorbereich." },
         { "t": "Bodenbeschichtung", "d": "Von der glatten Verlaufsbeschichtung bis zur abgestreuten Trägerschicht, passend zu Last und Nutzung." },
-        { "t": "Imprägnierung & Versiegelung", "d": "Schutz bei natürlicher Betonoptik." },
+        { "t": "Imprägnierung & Verkieselung", "d": "Schutz bei natürlicher Betonoptik, auch als chemische Betonverdichtung ohne Kunstharzfilm." },
         { "t": "Rutschhemmung", "d": "R9 schon mit Mattversiegelung oder Mattierungsmittel, R10 bis R13 mit eingestreutem Quarzsand." },
-        { "t": "Markierungen & Hohlkehlen", "d": "Stellplätze, Wege, Sicherheitszonen und saubere Übergänge zur Wand." }
+        { "t": "Markierungen & Hohlkehlen", "d": "Stellplätze, farbig abgesetzte Fahr- und Gehwege, Sicherheitszonen und saubere Übergänge zur Wand." }
       ],
       "areas": ["Tiefgaragen & Parkdecks", "Produktion & Lager", "Großküchen", "Werkstätten", "Technik- & Kellerräume"],
       "layers": [2, 3, 4, 5],
@@ -137,9 +137,9 @@
       "scope": [
         { "t": "Beratung", "d": "Material, Oberfläche und Wirkung im Raum." },
         { "t": "Bemusterung", "d": "Abstimmung der Optik nach Absprache." },
-        { "t": "Einbau", "d": "Sorgfältige Herstellung des Sichtbelags." },
+        { "t": "Einbau", "d": "Sichtestrich, Estrich jeglicher Art oder Terrazzo, sorgfältig hergestellt." },
         { "t": "Flügelglätten", "d": "Dichte, gleichmäßige Oberfläche." },
-        { "t": "Schleifen", "d": "Für den gewünschten Charakter der Fläche." },
+        { "t": "Schleifen & Polieren", "d": "Diamantschliff bis zur seidenglänzenden Oberfläche, je nach gewünschtem Charakter." },
         { "t": "Imprägnierung & Versiegelung", "d": "Schutz bei voller Optik." }
       ],
       "areas": ["Showrooms & Ausstellungen", "Büros & Agenturen", "Gastronomie & Handel", "Wohnräume & Lofts", "Moderne Industrieflächen"],
@@ -167,7 +167,7 @@
         { "t": "Vorbereitung & Bewehrung", "d": "Sauberer Unterbau als Grundlage." },
         { "t": "Betoneinbau", "d": "Fachgerechter Einbau und Verdichtung." },
         { "t": "Flügelglätten", "d": "Geschlossene, ebene Oberfläche." },
-        { "t": "Oberflächenvergütung", "d": "Hartstoffeinstreuung für höhere Abriebfestigkeit." },
+        { "t": "Oberfläche", "d": "Hartstoffeinstreuung, Besenstrich oder Verkieselung, passend zur Nutzung." },
         { "t": "Fugenschnitt & Nachbehandlung", "d": "Für einen rissarmen, dauerhaften Boden." }
       ],
       "areas": ["Neubau von Hallen", "Logistikzentren", "Produktionsflächen", "Werkstätten", "Feuerwehr- & Kommunalbauten"],
