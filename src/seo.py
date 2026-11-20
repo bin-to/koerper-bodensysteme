@@ -12,7 +12,7 @@ BUSINESS = {
     "alternateName": "Körper Bodensysteme – Industrie- und Betonbodensanierung",
     "slogan": "Böden, die tragen.",
     "description": "Fachbetrieb nach Wasserhaushaltsgesetz (WHG) für Industrie- und Betonbodensanierung, "
-                   "Beschichtung und Imprägnierung, Fugen- und Diamantschleifarbeiten, Sichtbeläge und "
+                   "Betoninstandsetzung, Beschichtung und Imprägnierung, Diamantschleifarbeiten, Sichtbeläge und "
                    "Industrieböden aus Beton. Sitz in Merxheim, Einsatz in ganz Deutschland und im europäischen Ausland.",
     "url": SITE + "/",
     "logo": SITE + "/assets/brand/apple-touch-icon.png",
@@ -39,7 +39,7 @@ BUSINESS = {
     "hasCredential": {"@type": "EducationalOccupationalCredential",
                       "name": "Fachbetrieb nach Wasserhaushaltsgesetz (WHG)"},
     "knowsAbout": ["Industriebodensanierung", "Betonbodensanierung", "Bodenbeschichtung", "Imprägnierung",
-                   "Versiegelung", "Fugensanierung", "Diamantschleifen", "Kugelstrahlen", "Fräsen",
+                   "Versiegelung", "Betoninstandsetzung", "Fugensanierung", "Diamantschleifen", "Kugelstrahlen", "Fräsen",
                    "Sichtbeläge", "Industrieboden aus Beton", "WHG-Flächen"],
     "sameAs": ["https://www.instagram.com/koerperbodensysteme"],
 }
@@ -141,7 +141,7 @@ def llms_txt(items, svc_url, partners):
         "# Körper Bodensysteme",
         "",
         "> Fachbetrieb nach Wasserhaushaltsgesetz (WHG) für Industrie- und Betonbodensanierung, Beschichtung und "
-        "Imprägnierung, Fugen- und Diamantschleifarbeiten, Sichtbeläge und Industrieböden aus Beton. "
+        "Imprägnierung, Betoninstandsetzung, Diamantschleifarbeiten, Sichtbeläge und Industrieböden aus Beton. "
         "Inhabergeführt (Christian Körper), gegründet 2015, Sitz in Merxheim (Rheinland-Pfalz), Außenstelle Süd. "
         "Einsatz in ganz Deutschland und im europäischen Ausland.",
         "",

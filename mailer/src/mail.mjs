@@ -2,7 +2,7 @@
 // Wird von der Vercel Function (api/anfrage.mjs) und der lokalen Vorschau (preview.mjs) genutzt.
 
 export const ROLES = ['Betreiber / Industrie', 'Generalunternehmer / Bauträger', 'Architekt / Planer', 'Privat / Gewerbe'];
-export const TYPES = ['Sanierung', 'Neuer Industrieboden', 'Beschichtung', 'Sichtbelag', 'Fugen / Schleifen', 'WHG-Fläche'];
+export const TYPES = ['Sanierung', 'Betoninstandsetzung', 'Diamantschleifen', 'Neuer Industrieboden', 'Beschichtung', 'Sichtbelag', 'Fugen / Schleifen', 'WHG-Fläche'];
 export const AREAS = ['bis 200 m²', '200–1.000 m²', '1.000–5.000 m²', 'über 5.000 m²'];
 
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -33,6 +33,7 @@ export function validate(body) {
   };
   if (!data.name) return { ok: false, error: 'name' };
   if (!/^[^@\s<>"]+@[^@\s<>"]+\.[^@\s<>"]{2,}$/.test(data.email)) return { ok: false, error: 'email' };
+  if (data.phone.replace(/\D/g, '').length < 6) return { ok: false, error: 'phone' };
   return { ok: true, data };
 }
 

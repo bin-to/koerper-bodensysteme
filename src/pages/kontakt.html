@@ -58,7 +58,8 @@
               <label><input type="checkbox" name="type" value="Neuer Industrieboden"><span>Neuer Industrieboden</span></label>
               <label><input type="checkbox" name="type" value="Beschichtung"><span>Beschichtung</span></label>
               <label><input type="checkbox" name="type" value="Sichtbelag"><span>Sichtbelag</span></label>
-              <label><input type="checkbox" name="type" value="Fugen / Schleifen"><span>Fugen / Schleifen</span></label>
+              <label><input type="checkbox" name="type" value="Betoninstandsetzung"><span>Betoninstandsetzung</span></label>
+              <label><input type="checkbox" name="type" value="Diamantschleifen"><span>Diamantschleifen</span></label>
               <label><input type="checkbox" name="type" value="WHG-Fläche"><span>WHG-Fläche</span></label>
             </div>
           </fieldset>
@@ -76,7 +77,7 @@
             <label class="field"><span>Name*</span><input name="name" autocomplete="name" required></label>
             <label class="field"><span>Firma</span><input name="company" autocomplete="organization"></label>
             <label class="field"><span>E-Mail*</span><input type="email" name="email" autocomplete="email" required></label>
-            <label class="field"><span>Telefon</span><input type="tel" name="phone" autocomplete="tel"></label>
+            <label class="field"><span>Telefon*</span><input type="tel" name="phone" autocomplete="tel" required></label>
             <label class="field field--full"><span>Ort und kurze Beschreibung</span><textarea name="message" rows="4" placeholder="z. B. Lagerhalle in Mainz, Risse und Abplatzungen, Ausführung im Sommer"></textarea></label>
           </div>
           <label class="hp" aria-hidden="true">Bitte leer lassen<input name="website" tabindex="-1" autocomplete="off"></label>
@@ -109,13 +110,11 @@
           <p class="eyebrow">Anfahrt</p>
           <h2 id="map-title" class="h2">Albachstraße 1, 55627 Merxheim</h2>
           <p>Unser Stammsitz liegt im Landkreis Bad Kreuznach. Von hier aus und von unserer Außenstelle Süd sind wir bundesweit im Einsatz.</p>
-          <a class="link-arrow" href="https://www.google.com/maps/search/?api=1&amp;query=Albachstra%C3%9Fe+1%2C+55627+Merxheim" target="_blank" rel="noopener">Route in Google Maps planen <span aria-hidden="true">↗</span></a>
+          <a class="link-arrow" href="{{maps_url}}" target="_blank" rel="noopener">Route in Google Maps planen <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="map-frame" data-consent-embed="media" data-src="https://www.google.com/maps?q=Albachstra%C3%9Fe%201%2C%2055627%20Merxheim&amp;output=embed" data-title="Karte: Körper Bodensysteme, Albachstraße 1, 55627 Merxheim">
-          <div class="map-placeholder">
-            <p><b>Karte laden?</b>Beim Laden der Karte werden Daten an Google übertragen. Mehr dazu in unserer <a href="/datenschutz/#google-maps">Datenschutzerklärung</a>.</p>
-            <button class="btn btn-dark" type="button" data-consent-allow="media">Karte anzeigen</button>
-          </div>
-        </div>
+        <a class="map-card" href="{{maps_url}}" target="_blank" rel="noopener" aria-label="Körper Bodensysteme, Albachstraße 1, 55627 Merxheim – in Google Maps öffnen (neues Fenster)">
+          {{anfahrt_map}}
+          <span class="map-cta" aria-hidden="true">In Google Maps öffnen <span>↗</span></span>
+        </a>
       </div>
     </section>

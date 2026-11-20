@@ -25,6 +25,11 @@ COUNTRY_LABELS = [("Deutschland", 10.2, 51.55, "middle"), ("Schweiz", 7.55, 46.5
 COUNTRY_OF = {"brixen": "IT", "schweiz": "CH"}
 
 
+# Gesamtbilanz für die Kennzahlen (Angabe Körper Bodensysteme, Abstimmung Nov. 2026)
+TOTAL_PROJECTS = 3600
+TOTAL_AREA = 1040100
+YEARS_EXPERIENCE = 20
+
 def area_m2(s):
     """'2.000 m²' -> 2000, 'Grube 170 m²' -> 170, 'Kleinflächen' -> 0."""
     m = re.search(r"(\d[\d.]*)\s*m²", s)
@@ -115,11 +120,14 @@ def render(projects, services, karte):
     total = sum(p["_area"] for p in projects)
     places = len({p["place"] for p in projects})
     countries_n = len({COUNTRY_OF.get(p["id"], "DE") for p in projects})
-    stats = [("projects", len(projects), "Projekte"), ("area", total, "m² Fläche"),
-             ("places", places, "Orte"), ("countries", countries_n, "Länder")]
+    # Gesamtbilanz seit Gründung (Angabe des Betriebs); die Karte zeigt nur aktuelle Beispiele
+    stats = [("projects", TOTAL_PROJECTS, "Projekte"), ("area", TOTAL_AREA, "m² Fläche"),
+             ("years", YEARS_EXPERIENCE, "Jahre Erfahrung"), ("countries", countries_n, "Länder")]
     stats_html = "\n".join(
         f'            <div><dt>{lbl}</dt><dd data-stat="{key}" data-to="{val}">{fmt_int(val)}</dd></div>'
         for key, val, lbl in stats)
+    stats_note = (f'Auf der Karte: <b data-note="projects">{len(projects)}</b> aktuelle Beispielprojekte mit '
+                  f'<b data-note="area">{fmt_int(total)}</b> m²')
 
     # ---------- Filter ----------
     counts = {g: sum(1 for p in projects if p["group"] == g) for g in order}
@@ -173,6 +181,7 @@ def render(projects, services, karte):
 
     return {
         "atlas_stats": stats_html,
+        "atlas_stats_note": stats_note,
         "atlas_filter": "\n".join(chips),
         "atlas_map": svg,
         "atlas_groups": "\n".join(groups),

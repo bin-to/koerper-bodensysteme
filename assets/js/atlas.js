@@ -38,12 +38,12 @@
     };
     requestAnimationFrame(step);
   }
+  // Die großen Zahlen sind die Gesamtbilanz; der Filter ändert nur die Zeile darunter
+  const noteEls = Object.fromEntries($$('[data-note]', root).map(el => [el.dataset.note, el]));
   function updateStats() {
     const list = DATA.projects.filter(visible);
-    countTo('projects', list.length);
-    countTo('area', list.reduce((s, p) => s + p.m2, 0));
-    countTo('places', new Set(list.map(p => p.place)).size);
-    countTo('countries', new Set(list.map(p => p.country)).size);
+    if (noteEls.projects) noteEls.projects.textContent = fmt(list.length);
+    if (noteEls.area) noteEls.area.textContent = fmt(list.reduce((s, p) => s + p.m2, 0));
   }
 
   /* ---------- Auftritt ---------- */

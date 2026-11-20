@@ -5,6 +5,9 @@
   "buildCommand": "python3 build.py",
   "outputDirectory": "dist",
   "trailingSlash": true,
+  "redirects": [
+    { "source": "/dienstleistungen/fugen-and-diamantschleifarbeiten/", "destination": "/dienstleistungen/diamantschleifarbeiten/", "permanent": true }
+  ],
   "functions": {
     "api/anfrage.mjs": {
       "includeFiles": "mailer/{templates,assets}/**",

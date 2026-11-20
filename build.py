@@ -25,6 +25,7 @@ from urllib.parse import urlencode
 sys.path.insert(0, str(Path(__file__).parent / "src"))
 import seo  # noqa: E402
 import atlas  # noqa: E402
+import anfahrt  # noqa: E402
 
 ROOT = Path(__file__).parent
 SRC = ROOT / "src"
@@ -192,7 +193,7 @@ def build_overview():
         "service_cards": "\n".join(cards), "process": process_items(), "cta_band": cta_band(),
     })
     title = "Leistungen im Überblick | Körper Bodensysteme"
-    desc = ("Bodensanierung, Fugen- und Diamantschleifarbeiten, Beschichtung, Sichtbeläge und "
+    desc = ("Bodensanierung, Betoninstandsetzung, Diamantschleifarbeiten, Beschichtung, Sichtbeläge und "
             "Industrieböden aus Beton: alle Leistungen im Überblick.")
     page("/dienstleistungen/", title, desc, content, body_class="page-sub page-overview",
          og_image="/assets/img/leistungen/industrie-und-betonbodensanierung/hero.webp",
@@ -230,6 +231,7 @@ def build_leistungen():
             # Abschnitt "Im System" nur, wenn die Leistung im Beispielaufbau vorkommt
             "system": render(SYSTEM_TPL, {"layer_note": it["layer_note"], "layers": ",".join(map(str, it["layers"]))}) if it["layers"] else "",
             "highlights": highlights, "scope": scope, "process": process_items(), "areas": areas,
+            "gallery_title": it.get("gallery_title", "Einblicke von der Baustelle"),
             "gallery": gallery, "others": others, "cta_href": href, "cta_band": cta_band(href=href),
         })
         title = f"{it.get('seo_title', it['title'])} | Körper Bodensysteme"
@@ -305,8 +307,13 @@ def build_about():
          schema=seo.simple_schema("/uber-uns/", title, desc, "AboutPage", "Über uns"))
 
 
+MAPS_URL = "https://maps.app.goo.gl/JqNobMERw4MEFnmp9"  # Firmeneintrag Körper Bodensysteme
+
+
 def build_contact():
-    content = render(read("pages/kontakt.html"), {"process": process_items(), "form_endpoint": esc(FORM_ENDPOINT)})
+    karte = json.loads(read("data/karte.json"))
+    content = render(read("pages/kontakt.html"), {"process": process_items(), "form_endpoint": esc(FORM_ENDPOINT),
+                                                   "anfahrt_map": anfahrt.render(karte), "maps_url": MAPS_URL})
     title = "Kontakt & Projektanfrage | Körper Bodensysteme"
     desc = ("Projekt anfragen bei Körper Bodensysteme: Telefon +49 6754 690 3950, info@koerper-bodensysteme.de, "
             "Albachstraße 1, 55627 Merxheim. Wir melden uns persönlich.")

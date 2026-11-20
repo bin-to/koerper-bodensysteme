@@ -27,6 +27,8 @@
 .atlas-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: clamp(40px, 5vw, 72px) 0 0; border-top: 1px solid var(--a-line); border-bottom: 1px solid var(--a-line); }
 .atlas-stats > div { padding: 22px 0 20px; display: flex; flex-direction: column-reverse; gap: 4px; }
 .atlas-stats > div + div { padding-left: clamp(14px, 2vw, 28px); border-left: 1px solid var(--a-line); }
+.atlas-stats-note { margin: 12px 0 0; font-size: 14px; color: var(--a-mut); }
+.atlas-stats-note b { color: var(--white); font-weight: 600; font-variant-numeric: tabular-nums; }
 .atlas-stats dt { font-family: var(--f-display); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--a-mut); }
 .atlas-stats dd { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(38px, 5vw, 84px); line-height: .9; font-variant-numeric: tabular-nums; color: var(--white); }
 .atlas-stats > div:nth-child(2) dd { color: var(--orange); }

@@ -394,9 +394,11 @@
   if (form) form.addEventListener('submit', async e => {
     e.preventDefault();
     let ok = true;
-    ['name', 'email'].forEach(n => {
+    ['name', 'email', 'phone'].forEach(n => {
       const f = form.elements[n]; const wrap = f.closest('.field');
-      const valid = f.value.trim() && (n !== 'email' || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.value.trim()));
+      const v = f.value.trim();
+      const valid = v && (n !== 'email' || /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v))
+        && (n !== 'phone' || v.replace(/\D/g, '').length >= 6);
       wrap.classList.toggle('is-invalid', !valid); if (!valid) ok = false;
     });
     const consent = form.elements.consent;
@@ -477,45 +479,18 @@
     if (!$('[data-mm-sub][aria-current]')) $('.mm-all', mmSub).setAttribute('aria-current', 'page');
   }
 
-  /* ---------- Consent (Cookie-Einstellungen) ---------- */
+  /* ---------- Datenschutzhinweis (nur Info, keine Einwilligung nötig) ---------- */
   const CKEY = 'kb-consent';
   const box = $('[data-consent-box]');
-  const readConsent = () => { try { return JSON.parse(localStorage.getItem(CKEY)); } catch (e) { return null; } };
-  const consent = { state: readConsent() };
-  function applyConsent() {
-    const ok = !!(consent.state && consent.state.media);
-    $$('[data-consent-embed="media"]').forEach(el => {
-      const has = $('iframe', el);
-      if (ok && !has) {
-        const f = document.createElement('iframe');
-        f.src = el.dataset.src; f.title = el.dataset.title || 'Eingebetteter Inhalt';
-        f.loading = 'lazy'; f.referrerPolicy = 'no-referrer-when-downgrade'; f.allowFullscreen = true;
-        el.appendChild(f);
-        const ph = $('.map-placeholder', el); if (ph) ph.hidden = true;
-      } else if (!ok && has) {
-        has.remove(); const ph = $('.map-placeholder', el); if (ph) ph.hidden = false;
-      }
-    });
-    const cb = $('[data-consent-cat="media"]'); if (cb) cb.checked = ok;
-  }
-  function saveConsent(media) {
-    consent.state = { v: 1, media: !!media, ts: new Date().toISOString() };
-    try { localStorage.setItem(CKEY, JSON.stringify(consent.state)); } catch (e) { /* privater Modus */ }
-    applyConsent(); closeConsent();
-  }
-  function showView(v) { $$('[data-consent-view]', box).forEach(el => { el.hidden = el.dataset.consentView !== v; }); }
-  function openConsent(view) { if (!box) return; showView(view || 'main'); box.hidden = false; applyConsent(); }
-  function closeConsent() { if (box) box.hidden = true; }
   if (box) {
-    $$('[data-consent-accept]', box).forEach(b => b.addEventListener('click', () => saveConsent(true)));
-    $$('[data-consent-reject]', box).forEach(b => b.addEventListener('click', () => saveConsent(false)));
-    $('[data-consent-settings]', box).addEventListener('click', () => showView('settings'));
-    $('[data-consent-save]', box).addEventListener('click', () => saveConsent($('[data-consent-cat="media"]', box).checked));
-    if (!consent.state) openConsent('main');
+    let seen = false;
+    try { seen = !!localStorage.getItem(CKEY); } catch (e) { /* privater Modus */ }
+    $('[data-consent-ok]', box).addEventListener('click', () => {
+      try { localStorage.setItem(CKEY, JSON.stringify({ v: 2, seen: true, ts: new Date().toISOString() })); } catch (e) { /* privater Modus */ }
+      box.hidden = true;
+    });
+    if (!seen) box.hidden = false;
   }
-  $$('[data-consent-open]').forEach(b => b.addEventListener('click', () => openConsent('settings')));
-  $$('[data-consent-allow="media"]').forEach(b => b.addEventListener('click', () => saveConsent(true)));
-  applyConsent();
 
   /* ---------- Process progress ---------- */
   const proc = $('[data-process]');

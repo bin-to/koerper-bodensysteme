@@ -4,7 +4,7 @@
 
 **Das Unternehmen.** Körper Bodensysteme, Merxheim (Rheinland-Pfalz), Inhaber Christian Körper. Gegründet 2015, mehr als 13 Jahre Branchenerfahrung. Fachbetrieb nach Wasserhaushaltsgesetz (WHG), TÜV-zertifiziert, Außenstelle Süd (Dipl.-Ing. Daniel Schurr). Einsatzgebiet: ganz Deutschland und das europäische Ausland. Eigenes Team, eigener Fuhrpark und Maschinenpark. Die Firma verarbeitet Systeme von Sika, StoCretec, KORODUR, RCR, Chemotechnik u. a.
 
-**Leistungen.** Industrie- und Betonbodensanierung · Fugen- & Diamantschleifarbeiten · Beschichtung & Imprägnierung · Sichtbeläge · Industrieboden aus Beton. Dazu kommen die Verfahren Fräsen, Kugelstrahlen und Versiegeln.
+**Leistungen.** Industrie- und Betonbodensanierung · Betoninstandsetzung · Diamantschleifarbeiten · Beschichtung & Imprägnierung · Sichtbeläge · Industrieboden aus Beton. Dazu kommen die Verfahren Fräsen, Kugelstrahlen und Versiegeln.
 
 **Die bestehende Website.** Auf der Startseite steht eine Floskel („Qualität, Zuverlässigkeit und Präzision“), dazu Öffnungszeiten und ein Formular. Das stärkste Argument, der WHG-Status, steht als Nebensatz da. Die Leistungen haben keine Hierarchie, und Projektbilder liegen nur in Galerien auf Unterseiten. Es gibt keine Ansprache einzelner Zielgruppen und keinen Beweis für Kompetenz. Die vorhandenen Assets sind aber gut: viele echte Baustellenfotos, ein Team in Firmenkleidung, Fahrzeuge und Maschinen mit Branding. Daraus lässt sich eine echte, nicht gestellte Bildsprache bauen.
 
