@@ -24,13 +24,13 @@
 .atlas-intro { margin: 0; color: var(--a-mut); max-width: 46ch; }
 
 /* ---------- Kennzahlen ---------- */
-.atlas-stats { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: clamp(40px, 5vw, 72px) 0 0; border-top: 1px solid var(--a-line); border-bottom: 1px solid var(--a-line); }
+.atlas-stats { container-type: inline-size; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.45fr) minmax(0, 1fr) minmax(0, .8fr); margin: clamp(40px, 5vw, 72px) 0 0; border-top: 1px solid var(--a-line); border-bottom: 1px solid var(--a-line); }
 .atlas-stats > div { padding: 22px 0 20px; display: flex; flex-direction: column-reverse; gap: 4px; }
 .atlas-stats > div + div { padding-left: clamp(14px, 2vw, 28px); border-left: 1px solid var(--a-line); }
 .atlas-stats-note { margin: 12px 0 0; font-size: 14px; color: var(--a-mut); }
 .atlas-stats-note b { color: var(--white); font-weight: 600; font-variant-numeric: tabular-nums; }
 .atlas-stats dt { font-family: var(--f-display); font-weight: 600; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--a-mut); }
-.atlas-stats dd { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: clamp(38px, 5vw, 84px); line-height: .9; font-variant-numeric: tabular-nums; color: var(--white); }
+.atlas-stats dd { margin: 0; font-family: var(--f-display); font-weight: 700; font-size: min(clamp(38px, 5vw, 84px), 6.6cqi); white-space: nowrap; line-height: .9; font-variant-numeric: tabular-nums; color: var(--white); }
 .atlas-stats > div:nth-child(2) dd { color: var(--orange); }
 
 /* ---------- Filter ---------- */
@@ -152,16 +152,19 @@
 }
 @media (max-width: 760px) {
   .atlas-head { grid-template-columns: 1fr; }
-  .atlas-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .atlas-stats > div:nth-child(3) { padding-left: 0; border-left: 0; }
-  .atlas-stats > div:nth-child(n + 3) { border-top: 1px solid var(--a-line); }
+  /* Handy: Fläche als große Zeile oben, die drei anderen Zahlen darunter nebeneinander */
+  .atlas-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .atlas-stats > div:nth-child(2) { grid-column: 1 / -1; order: -1; padding-left: 0; border-left: 0; border-bottom: 1px solid var(--a-line); }
+  .atlas-stats > div:nth-child(1) { padding-left: 0; border-left: 0; }
   .atlas-filter { flex-wrap: nowrap; overflow-x: auto; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter); scrollbar-width: none; }
   .atlas-filter::-webkit-scrollbar { display: none; }
   .af-chip { flex: none; }
   .atlas { padding-block: 72px 80px; }
   .atlas-stats { margin-top: 32px; }
   .atlas-stats > div { padding: 16px 0 14px; }
-  .atlas-stats dd { font-size: 44px; }
+  .atlas-stats dd { font-size: min(40px, 10.5cqi); }
+  .atlas-stats > div:nth-child(2) dd { font-size: min(64px, 17cqi); }
+  .atlas-stats > div { justify-content: flex-end; }  /* Zahlen oben auf einer Linie, auch wenn ein Label umbricht */
   .atlas-filter { margin: 20px calc(var(--gutter) * -1) 28px; }
   .atlas-legend { font-size: 12px; gap: 4px 16px; }
   .lg-x { display: none; }
