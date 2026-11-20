@@ -14,12 +14,16 @@
   const contact = $('[data-brief]') || $('.cta-band') || $('.footer');
   let lastY = 0;
   let travel = 0;   // aufsummierte Scrollstrecke in der aktuellen Richtung (+ runter, − hoch)
+  // Maße nur bei Resize/Load messen: Lesen von Höhen in jedem Scroll-Frame zwingt den Browser zum Neuberechnen
+  let maxY = 0, heroEnd = 0;
+  function measureHeader() {
+    maxY = Math.max(0, document.documentElement.scrollHeight - vh());
+    heroEnd = hero.offsetHeight - header.offsetHeight;
+  }
   function onScrollHeader() {
     if (document.body.classList.contains('menu-open')) return;   // während das Menü offen ist, nichts umschalten
-    const maxY = document.documentElement.scrollHeight - vh();
     // iOS-Gummiband oben/unten liefert Scrollwerte außerhalb der Seite: ignorieren, sonst springt die Leiste
-    const y = clamp(window.scrollY, 0, Math.max(0, maxY));
-    const heroEnd = hero.offsetHeight - header.offsetHeight;
+    const y = clamp(window.scrollY, 0, maxY || Infinity);
     header.classList.toggle('is-solid', y > heroEnd - 1);
     const dy = y - lastY;
     lastY = y;
@@ -91,8 +95,9 @@
 
   /* ---------- Hero parallax ---------- */
   const heroImg = $('.hero-media img');
+  const parallaxMQ = matchMedia('(min-width: 1081px) and (pointer: fine)');   // auf dem Handy kostet das nur Flüssigkeit
   function onScrollHero() {
-    if (reduce || !heroImg) return;
+    if (reduce || !heroImg || !parallaxMQ.matches) return;
     const y = window.scrollY;
     if (y < vh() * 1.2) heroImg.style.translate = `0 ${y * -0.18}px`;
   }
@@ -507,7 +512,10 @@
     if (!proc) return;
     const r = proc.getBoundingClientRect();
     const p = reduce ? 1 : clamp((vh() * .75 - r.top) / (r.height * .9 + vh() * .1));
-    proc.style.setProperty('--p', p.toFixed(3));
+    const pv = p.toFixed(3);
+    if (pv === proc.dataset.p) return;
+    proc.dataset.p = pv;
+    proc.style.setProperty('--p', pv);
     procItems.forEach((li, i) => li.classList.toggle('is-on', p >= i / procItems.length + .02 || p === 1));
   }
 
@@ -556,8 +564,10 @@
     });
   }
   addEventListener('scroll', onScroll, { passive: true });
-  addEventListener('resize', () => { sizeHS(); onScroll(); });
-  hsMQ.addEventListener?.('change', () => { sizeHS(); onScroll(); });
-  addEventListener('load', () => { sizeHS(); onScroll(); });
-  sizeHS(); if (steps.length) setStep(0); onScroll();
+  addEventListener('resize', () => { sizeHS(); measureHeader(); onScroll(); });
+  hsMQ.addEventListener?.('change', () => { sizeHS(); measureHeader(); onScroll(); });
+  addEventListener('load', () => { sizeHS(); measureHeader(); onScroll(); });
+  // Seitenhöhe ändert sich auch durch nachladende Bilder oder aufklappende Inhalte
+  if ('ResizeObserver' in window) new ResizeObserver(() => measureHeader()).observe(document.body);
+  sizeHS(); measureHeader(); if (steps.length) setStep(0); onScroll();
 })();

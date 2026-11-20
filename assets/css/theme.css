@@ -708,3 +708,10 @@ body.menu-open .site-header .header-cta .btn { display: none; }
 .step-pair img { max-width: none; margin-top: 0; }
 .step-pair figcaption { font-family: var(--f-display); font-weight: 600; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--stone); margin-top: 6px; }
 @media (max-width: 960px) { .step-pair { max-width: 300px; } }
+
+/* Flüssiges Scrollen auf dem Handy: kein Live-Blur hinter den festen Leisten (wird sonst in jedem Frame neu berechnet) */
+@media (max-width: 1080px), (pointer: coarse) {
+  .site-header.is-solid { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255, 255, 255, .98); }
+  .mobile-cta { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(243, 241, 236, .98); }
+  .hero-media img { will-change: auto; }
+}
