@@ -13,14 +13,22 @@
   const mobileCta = $('[data-mobile-cta]');
   const contact = $('[data-brief]') || $('.cta-band') || $('.footer');
   let lastY = 0;
+  let travel = 0;   // aufsummierte Scrollstrecke in der aktuellen Richtung (+ runter, − hoch)
   function onScrollHeader() {
     if (document.body.classList.contains('menu-open')) return;   // während das Menü offen ist, nichts umschalten
-    const y = window.scrollY;
+    const maxY = document.documentElement.scrollHeight - vh();
+    // iOS-Gummiband oben/unten liefert Scrollwerte außerhalb der Seite: ignorieren, sonst springt die Leiste
+    const y = clamp(window.scrollY, 0, Math.max(0, maxY));
     const heroEnd = hero.offsetHeight - header.offsetHeight;
     header.classList.toggle('is-solid', y > heroEnd - 1);
-    const goingDown = y > lastY && y > heroEnd + 200;
-    if (!document.body.classList.contains('menu-open')) header.classList.toggle('is-hidden', goingDown);
+    const dy = y - lastY;
     lastY = y;
+    // Richtungswechsel setzt die Strecke zurück; erst ab ein paar Pixeln in eine Richtung umschalten,
+    // damit Schwung-Scrollen und Mini-Ruckler auf dem Handy die Leiste nicht flackern lassen
+    if (dy) travel = Math.sign(dy) === Math.sign(travel) ? travel + dy : dy;
+    if (y <= heroEnd + 200) header.classList.remove('is-hidden');
+    else if (travel > 24) header.classList.add('is-hidden');
+    else if (travel < -12) header.classList.remove('is-hidden');
     if (mobileCta) {
       const cr = contact.getBoundingClientRect();
       mobileCta.classList.toggle('is-on', y > heroEnd * .6 && cr.top > vh() * .9);
@@ -56,7 +64,7 @@
     } else {
       menu.classList.remove('is-open');
       document.body.classList.remove('menu-open');
-      lastY = lockedY;            // Wiederherstellen der Position zählt nicht als „runterscrollen“
+      lastY = lockedY; travel = 0; // Wiederherstellen der Position zählt nicht als „runterscrollen“
       lockScroll(false);
       header.classList.remove('is-hidden');
       menu.hidden = true;
