@@ -328,7 +328,7 @@ FORM_PRIVACY_MAILTO = ("Das Anfrageformular auf dieser Website überträgt keine
 # TODO vor dem Livegang juristisch prüfen lassen
 FORM_PRIVACY_MAILJET = (
     "Wenn Sie das Anfrageformular nutzen, werden Ihre Angaben verschlüsselt an eine Serverfunktion bei unserem "
-    "Hosting-Anbieter Vercel (siehe Abschnitt 3) übertragen und von dort per E-Mail über den Versanddienst Mailjet "
+    "Hosting-Anbieter Vercel (siehe Abschnitt 3) übertragen, die in Frankfurt am Main läuft, und von dort per E-Mail über den Versanddienst Mailjet "
     "(Mailjet SAS, 13-13 bis Rue de l’Aubrac, 75012 Paris, Frankreich; Server in der EU) an uns zugestellt. "
     "Zusätzlich erhalten Sie eine Eingangsbestätigung an die angegebene E-Mail-Adresse. "
     "Mit beiden Anbietern bestehen Verträge zur Auftragsverarbeitung (Art. 28 DSGVO). "

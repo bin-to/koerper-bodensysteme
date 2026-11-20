@@ -5,6 +5,7 @@
   "buildCommand": "python3 build.py",
   "outputDirectory": "dist",
   "trailingSlash": true,
+  "regions": ["fra1"],
   "redirects": [
     { "source": "/dienstleistungen/fugen-and-diamantschleifarbeiten/", "destination": "/dienstleistungen/diamantschleifarbeiten/", "permanent": true }
   ],
